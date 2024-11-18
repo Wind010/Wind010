@@ -1,0 +1,136 @@
+/* General Terminal Styling */
+body {
+  background-color: #1e1e1e;
+  color: #00ff00;
+  font-family: "andale mono",	/* MS WebFont */ "monotype.com",	/* MS WebFont, former name */ monaco,	/* MacOS */ /* Fallback options */ "courier new",	/* Windows, MacOS */ courier,	/* Unix+X, MacOS */ monospace;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+#terminal {
+  background-color: transparent; /* Set to transparent for effect */
+  padding: 20px;
+  border-radius: 10px 10px;
+  height: calc(100vh - 50px); /* Adjust height so terminal and input fit within the screen */
+  overflow-y: auto;
+  scrollbar-color: #00ff00 #1e1e1e;
+  scrollbar-width: thin;
+  white-space: pre-wrap;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+  font-size: 30px;
+
+  background: linear-gradient(#181818 50%, #111 50%);
+  background-size: 100% 5px;
+  background-repeat: repeat-y;
+}
+
+/* Matrix Theme Background */
+#terminal.matrix {
+  background-color: transparent; /* Matrix effect handled via canvas */
+}
+
+A, code, .highlight {
+  color: lightblue;
+}
+
+#input-line {
+  display: flex;
+  flex-shrink: 0;
+  padding: 10px 20px;
+  background-color: #1e1e1e;
+  border-top: 2px solid #00ff00;
+  position: relative;
+  z-index: 1; /* Keep input above canvas */
+}
+
+#prompt {
+  font-weight: bold;
+  font-size: 30px;
+  margin-right: 5px;
+}
+
+input {
+  background-color: #1e1e1e;
+  border: none;
+  color: #00ff00;
+  width: 100%;
+  outline: none;
+  font-family: "andale mono",	/* MS WebFont */ "monotype.com",	/* MS WebFont, former name */ monaco,	/* MacOS */ /* Fallback options */ "courier new",	/* Windows, MacOS */ courier,	/* Unix+X, MacOS */ monospace;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 50px;
+}
+
+#command-input {
+  background: none;
+  border: none;
+  color: inherit;
+  outline: none;
+  caret-color: transparent; /* Hide it so we can use custom cursor */
+  font-size: 30px;
+}
+
+/* Custom blinking cursor */
+.cursor {
+  width: 15px;
+  height: 30px;  background-color: #00ff00; 
+  animation: blink 0.7s step-end infinite;
+  margin-left: 2px; 
+  position: absolute; 
+  top: 27%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for centering */
+}
+
+@keyframes blink {
+  50% {
+      opacity: 0; /* Cursor disappears halfway through the animation */
+  }
+}
+
+
+/* Matrix Canvas Animation */
+canvas#matrixCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Below terminal text */
+  pointer-events: none;
+}
+
+
+
+@keyframes scanline {
+  0.01% {
+      height: 0;
+  }
+
+  99.99% {
+      height: 100%
+  }
+
+  100% {
+      height: 0;
+  }
+}
+
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.02);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+

@@ -1,0 +1,27 @@
+.grid-container {
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* grid-auto-rows: 300px;   */
+    grid-auto-rows: minmax(300px, 300px);
+    gap: 10px;
+    row-gap: 10px;
+    /* background-color: #2196F3; */
+    padding: 0px;
+}
+
+.grid-item {
+    font-size: 30px;
+    text-align: center;
+}
+
+.grid-item img {
+    /* background-color: #00ff00; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* or contain, depending on your desired behavior */
+}
+
+.grid-item a {
+    text-decoration: none; 
+}
