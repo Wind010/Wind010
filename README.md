@@ -2,7 +2,7 @@
 
 # Jeff Tong
 
-I am a software developer with interests in `cybersecurity` and `machine learning`.
+I am a software developer with interests in `cybersecurity` and `machine learning`.  This markdown is the content used for [About Me](https://wind010.github.io/Wind010/).
 
 <img src="./images/euc_01.jpg" alt="euc_01" style="width:300px;"/>
 
