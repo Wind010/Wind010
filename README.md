@@ -95,7 +95,6 @@ I dabble in electronics.
 ### Hacking
 
 I like participating in `Capture-The-Flags` (CTFs), CyberRanges, and Bug Bounties.
-<script>https://www.hackthebox.com/badge/594289</script>
 
 <img src="./images/htb_01.png" alt="htb_01" style="width:200px;"/>
 <img src="./images/htb_02.jpg" alt="htb_02" style="width:380px;"/>
