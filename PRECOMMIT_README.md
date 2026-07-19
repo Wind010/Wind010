@@ -1,6 +1,6 @@
 # Pre-Commit Hook
 
-Because Github Pages won't include the `ReadMe.md`, I have a pre-commit hook that populates the `js\readme.js` with a `base64` encoded string of teh contents of `ReadMe.md` that will get decoded by the page.  This `pre-commit` script should be included under `.git\hooks`.
+Because Github Pages won't include the `ReadMe.md`, I have a pre-commit hook that populates the `js\readme.js` with a `base64` encoded string of the contents of `ReadMe.md` that will get decoded by the page.  This `pre-commit` script should be included under `.git\hooks`.
 
 ```sh
 #!/bin/bash
