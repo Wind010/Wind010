@@ -1,111 +1,124 @@
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/loading.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume | Jeff Tong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0" rel="stylesheet">
+  <link rel="stylesheet" href="css/resume.css?v=20260719c">
+</head>
+<body data-theme="man">
+  <button id="fullToggle" class="full-toggle" type="button" aria-label="Toggle full work history">Full: Off</button>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous">
-        </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js"
-        integrity="sha512-MzluaiqTHieej9sKOtlT5D5uog5n278iCAX/sr8Ms271OkiKptg1RZgRXRjhQ+v4yO3LcffdeeQfiUfMpduqeA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
-
-    <script src="js/loading.js"></script>
-    <script src="js/index.js"></script>
-
-<body>
-    <div class="scanline"></div>
-    <center>
-        <div class="loading">About Me</div>
-    </center>
-
-    <div id="terminal">
-        <span class="instant">
-            ========================= BOOTING UP =========================
-        </span>
-        <br />
-        Loading...
-        [Ok].
-        <span class="clear"></span>
-        Greetings!<br />
-        <span class="clear"></span>
-        <br />
-        <br />
-        My Name is <span class="highlight">Jeff Tong</span>.
-        <br />
-        I'm a <span class="highlight">software developer, hacker,</span> and <span class="highlight">martial practitioner</span>.
-        <br />
-        <br />
-        Find out more about me with the terminal interface [<a href="terminal.html">HERE</a>].
-        <br />
-        <br />
-
-        Decode me if you can...
-        <br />
-        <br />
-        <!--  Hint: It's a matter of perspective... -->
-        <span class="instant logo">
-            ππππππππππππππππππππππππππππππππππππππππππππππππππππππππππππππππ
-            ππππππππππππππππππππππππππππππππ+≈ππππππππππππππππππππππππππππππ
-            πππππππππππππππππππππππππππππππ×++ππππππππππππππππππππππππππππππ
-            ππππππππππππππππππππππππππππππ∞++++πππππππππππππππππππππππππππππ
-            ππππππππππππππππππππππππππππππ+++++×ππππππππππππππππππππππππππππ
-            πππππππππππππππππππππππππππππ+++++++≠πππππππππππππππππππππππππππ
-            ππππππππππππππππππππππππππππ÷++=+++++πππππππππππππππππππππππππππ
-            πππππππππππππππππππππππππππ≠+++π∞++++×ππππππππππππππππππππππππππ
-            πππππππππππππππππππππππππππ+++πππ×++++=πππππππππππππππππππππππππ
-            ππππππππππππππππππππππππππ×++∞ππππ+++++∞ππππππππππππππππππππππππ
-            πππππππππππππππππππππππππ≠++-ππππππ+++++ππππππππππππππππππππππππ
-            ππππππππππππππππππππππππ√+++√ππππππ∞++++-πππππππππππππππππππππππ
-            ππππππππππππππππππππππππ+++≠ππππππππ≠++++≈ππππππππππππππππππππππ
-            πππππππππππππππππππππππ+++-ππππππππππ-++++ππππππππππππππππππππππ
-            ππππππππππππππππππππππ≠+++√πππππππππππ+++++πππππππππππππππππππππ
-            ππππππππππππππππππππππ+++=ππππππππππππ≈+++++ππππππππππππππππππππ
-            πππππππππππππππππππππ++++ππππππππππππππ×++++≠πππππππππππππππππππ
-            ππππππππππππππππππππ++++ππππππππππππππππ+++++√ππππππππππππππππππ
-            πππππππππππππππππππ-+++÷πππππππππππππππππ+++++√πππππππππππππππππ
-            ππππππππππππππππππ-++++πππππππππππππππππππ+++++≠ππππππππππππππππ
-            ππππππππππππππππ≈+++++ππππππππππππππππππππ≠++++++=ππππππππππππππ
-            πππππππ-+≈πππ∞+++++++≠πππππππππππππππππππππ-++++++++++++++ππππππ
-            πππππππ√+++++++++++++πππππππππππππππππππππππ+++++++++++++≠ππππππ
-            ππππππππ++++++++++++πππππππππππππππππππππππππ++++++++++++πππππππ
-            ππππππππ+++++++++++≈πππππππππππππππππππππππππ∞+++++++++++πππππππ
-            ππππππππ+++++++++++πππππππππππππππππππππππππππ≠++++++++++πππππππ
-            πππππππ∞++++++++++≈πππππππππππππππππππππππππππ√++++++++++=ππππππ
-            πππππππ∞∞≈-+++++++≈ππππππππππππππππππππππππππππ++++++++≠∞∞ππππππ
-            πππππππππππππ++++++πππππππππππππππππππππππππππ∞+++++√πππππππππππ
-            πππππππππππππππ×++++πππππππππππππππππππππππππ≈++++ππππππππππππππ
-            ππππππππππ∞ππππππ∞-++≠πππππππππππππππππππππ√+++∞ππππππ√πππππππππ
-            ππππππππππππ=√πππππππ=+×∞ππππππππππππππππ≈-=πππππππ√=πππππππππππ
-            ππππππππππππππ≈=∞πππππππππ√√ππππ≈πππππππππππππππ≈÷≈πππππππππππππ
-            πππππππππππππππππ=-×≈√ππππππππ√++-√ππππππππ√≠--=ππππππππππππππππ
-            πππππππππππππππππππππ=-+++++++++++++++++++-=ππππππππππππππππππππ
-            ππππππππππππππππππππππππππ√≈≠=÷÷÷÷÷=≠≈√πππππππππππππππππππππππππ
-        </span>
-        
-        <br />
-        <br />
-
-        aHR0cHM6Ly93aW5kMDEwLmhhc2hub2RlLmRldi8=
-
-        <br />
-        <br />
-        EOF;
+  <div class="theme-dock" aria-label="Theme menu">
+    <div class="theme-hotspot" aria-hidden="true"></div>
+    <div class="theme-icon" aria-hidden="true">🎨</div>
+    <div class="theme-flyout">
+      <button class="theme-option" data-theme-option="man" type="button">
+        <span class="material-symbols-outlined theme-option-icon" aria-hidden="true">menu_book</span>
+        <span>Linux Man</span>
+      </button>
+      <button class="theme-option" data-theme-option="terminal" type="button">
+        <span class="material-symbols-outlined theme-option-icon" aria-hidden="true">terminal</span>
+        <span>Unix Terminal</span>
+      </button>
+      <button class="theme-option" data-theme-option="lcars" type="button">
+        <span class="material-symbols-outlined theme-option-icon" aria-hidden="true">rocket_launch</span>
+        <span>LCARS</span>
+      </button>
+      <button class="theme-option" data-theme-option="minimal" type="button">
+        <span class="material-symbols-outlined theme-option-icon" aria-hidden="true">crop_5_4</span>
+        <span>Modern Minimal</span>
+      </button>
+      <button class="theme-option" data-theme-option="two-column" type="button">
+        <span class="material-symbols-outlined theme-option-icon" aria-hidden="true">view_week</span>
+        <span>Two-Column</span>
+      </button>
+      <button class="theme-option" data-theme-option="bold-header" type="button">
+        <span class="material-symbols-outlined theme-option-icon" aria-hidden="true">title</span>
+        <span>Bold Header</span>
+      </button>
+      <button class="theme-option" data-theme-option="timeline" type="button">
+        <span class="material-symbols-outlined theme-option-icon" aria-hidden="true">timeline</span>
+        <span>Timeline</span>
+      </button>
     </div>
+  </div>
 
-    <span class="animate">></span><span autofocus contenteditable="true" id="inputcmd"></span>
-    <span id="cursor"></span>
-    </span>
-    </p>
-    <p><span id="output"></span></p>
-    </div>
+  <div class="theme-label-wrap">
+    <button id="themeLabel" class="theme-label" type="button" aria-label="Current theme">
+      Theme: Linux Man
+    </button>
+  </div>
 
+  <div class="grain" aria-hidden="true"></div>
+  <main class="manpage" aria-live="polite">
+    <header class="man-head">
+      <span id="manHeadLeft">JEFF-TONG(1)</span>
+      <span id="manHeadCenter">User Commands</span>
+      <span id="manHeadRight">JEFF-TONG(1)</span>
+    </header>
+
+    <section class="section-name">
+      <h2>NAME</h2>
+      <p id="nameLine">Loading...</p>
+    </section>
+
+    <section class="section-synopsis">
+      <h2>SYNOPSIS</h2>
+      <p id="synopsisLine">Loading...</p>
+    </section>
+
+    <section class="section-description">
+      <h2>DESCRIPTION</h2>
+      <p id="descriptionLine">Loading...</p>
+    </section>
+
+    <section class="section-contact">
+      <h2>CONTACT INFORMATION</h2>
+      <div id="contactInfo"></div>
+    </section>
+
+    <section class="section-skills">
+      <h2>TECHNICAL SKILLS</h2>
+      <div id="skillsGrid" class="skills-grid"></div>
+    </section>
+
+    <section class="section-work">
+      <h2>WORK HISTORY</h2>
+      <div id="workHistory"></div>
+    </section>
+
+    <section class="section-projects">
+      <h2>PROJECTS</h2>
+      <div id="projects"></div>
+    </section>
+
+    <section class="section-education">
+      <h2>EDUCATION</h2>
+      <div id="education"></div>
+    </section>
+
+    <section class="section-languages">
+      <h2>LANGUAGES</h2>
+      <p id="languagesLine">Loading...</p>
+    </section>
+
+    <section class="section-interests">
+      <h2>INTERESTS</h2>
+      <p id="interestsLine">Loading...</p>
+    </section>
+
+    <footer class="man-foot">
+      <span id="footerLeft">jefftong.dev</span>
+      <span id="footerCenter"></span>
+      <span id="footerRight">JEFF-TONG(1)</span>
+    </footer>
+  </main>
+
+  <script src="js/resume.js?v=20260719a"></script>
 </body>
-
 </html>
