@@ -1,0 +1,274 @@
+{
+  "basics": {
+    "name": "Jeff Tong",
+    "label": "Senior Software Development Engineer",
+    "image": "",
+    "email": "wind.twd@gmail.com",
+    "phone": "",
+    "url": "https://wind010.github.io/Wind010",
+    "summary": "Senior Software Engineer with 15+ years of experience building scalable architectures for analytics, healthcare, and financial/payment platforms. Specializes in fraud analytics, platform modernization, and security-minded product delivery with full-stack development expertise. Passionate about offensive and defensive cybersecurity strategies.",
+    "location": {
+      "address": "",
+      "postalCode": "",
+      "city": "Seattle",
+      "countryCode": "US",
+      "region": "Washington"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "wind010",
+        "url": "https://github.com/wind010"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "Jeff Tong",
+        "url": "https://www.linkedin.com/in/jeff-jin-hung-tong/"
+      },
+      {
+        "network": "About Me",
+        "username": "wind010",
+        "url": "https://wind010.github.io/Wind010/"
+      },
+      {
+        "network": "Blog",
+        "username": "wind010",
+        "url": "https://wind010.hashnode.dev"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "CVS Health",
+      "position": "Senior Software Development Engineer",
+      "url": "https://www.cvshealth.com",
+      "startDate": "2026-06-27",
+      "endDate": "",
+      "summary": "Design, architect, and implement modernization-refactoring of backend services and legacy frontends.",
+      "highlights": [
+        "Refactored legacy MinuteClinic services to FastAPI to improve care provider scheduling experience."
+      ]
+    },
+    {
+      "name": "UglyEgg.AI",
+      "position": "Principle Software Development Engineer - CTO",
+      "url": "https://www.uglyegg.ai",
+      "startDate": "2026-04-26",
+      "endDate": "",
+      "summary": "Full Stack development of https://uglyegg.ai",
+      "highlights": [
+        "Architected scalable solution for Generative Search Optimization.",
+        "Development of frontend with React with feedback from business stakeholders to drive revenue.",
+        "Development of analytics and scraping services with Node.js to facilitate core business."
+      ]
+    },
+    {
+      "name": "Starbucks Coffee Company",
+      "position": "Software Development Engineer III - Retail Fraud Analytics",
+      "url": "https://www.starbucks.com",
+      "startDate": "2020-06-01",
+      "endDate": "",
+      "summary": "Built fraud decisioning, analytics, and internal productivity systems.",
+      "highlights": [
+        "Implemented performance improvements in a custom Spark analytics platform, reducing execution time by about 77%.",
+        "Architected and shipped a fraud decisioning and reporting system with REST APIs and Kafka log streaming that increased fraud detection.",
+        "Maintained and migrated settlement and reconciliation systems that prevent significant financial loss.",
+        "Discovered and reported internal and vendor application vulnerabilities to reduce remote code execution and data breach risk.",
+        "Built an internal Retrieval-Augmented Generation assistant on Databricks to improve team resolution time.",
+        "Created GitHub Copilot agentic workflows to summarize commits and generate Jira stories for multiple teams.",
+        "Prototyped agentic harnesses with Pi for internal orchestration and reporting."
+      ]
+    },
+    {
+      "name": "Starbucks Coffee Company",
+      "position": "Software Development Engineer III - Payments",
+      "url": "https://www.starbucks.com",
+      "startDate": "2018-09-01",
+      "endDate": "2020-07-01",
+      "summary": "Delivered secure payment platform enhancements for high-volume transaction systems.",
+      "highlights": [
+        "Implemented TOTP (RFC-6238) backend support for the Stars for Everyone launch.",
+        "Served as Team Security Champion and influenced secure architecture decisions early in the SDLC.",
+        "Supported mission-critical payment services handling millions of dollars in transactions with 24/7 availability.",
+        "Delivered Google Pay integration for Payment Service REST APIs used by the mobile app."
+      ]
+    },
+    {
+      "name": "Agilysys",
+      "position": "Principal Software Development Engineer",
+      "url": "https://www.agilysys.com",
+      "startDate": "2017-06-01",
+      "endDate": "2018-02-01",
+      "summary": "Led modernization efforts and microservices adoption for hospitality products.",
+      "highlights": [
+        "Architected modernization from legacy systems to microservices architecture.",
+        "Engineered Guest Profile and Itinerary microservices using ASP.NET Core, RabbitMQ, and Docker.",
+        "Mentored developers on modern frameworks and Domain-Driven Design.",
+        "Led offshore development and QA coordination for distributed delivery."
+      ]
+    },
+    {
+      "name": "BECU",
+      "position": "Software Development Engineer",
+      "url": "https://www.becu.org",
+      "startDate": "2016-09-01",
+      "endDate": "2017-06-01",
+      "summary": "Built full-stack applications for lending business lines.",
+      "highlights": [
+        "Delivered full-stack web applications for HELOC and Home Loans lines of business."
+      ]
+    },
+    {
+      "name": "Agilysys",
+      "position": "Senior Software Development Engineer",
+      "url": "https://www.agilysys.com",
+      "startDate": "2012-10-01",
+      "endDate": "2016-09-01",
+      "summary": "Resolved high-impact customer issues and supported major project continuity.",
+      "highlights": [
+        "Provided deep investigations and resolutions for VP/CEO-level customer escalations.",
+        "Unblocked projects valued at approximately $2.2M."
+      ]
+    },
+    {
+      "name": "Microsoft",
+      "position": "Build and Tools Engineer",
+      "url": "https://www.microsoft.com",
+      "startDate": "2009-10-01",
+      "endDate": "2012-10-01",
+      "summary": "Improved engineering throughput and code quality tooling across major product groups.",
+      "highlights": [
+        "Supported the CoreXt build system spanning MSBuild and NMake projects.",
+        "Reduced productivity and test-time loss by resolving and preventing build breaks.",
+        "Developed a source-control check-in quality tool adopted by Office 365, Xbox Kinect, and Exchange teams.",
+        "Contributed work recognized in Engineering Excellence award consideration."
+      ]
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "Western Washington University",
+      "url": "",
+      "area": "Physics",
+      "studyType": "Bachelor of Science",
+      "startDate": "",
+      "endDate": "2004-06-01",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Tech Pros",
+      "url": "",
+      "area": "Network / MCSE / MCSA",
+      "studyType": "Professional Training",
+      "startDate": "",
+      "endDate": "2005-06-01",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Whatcom Community College",
+      "url": "",
+      "area": "Running Start Program",
+      "studyType": "Program",
+      "startDate": "",
+      "endDate": "1999-06-01",
+      "score": "",
+      "courses": []
+    }
+  ],
+  "awards": [],
+  "certificates": [],
+  "publications": [],
+  "skills": [
+    {
+      "name": "Scripting",
+      "level": "Advanced",
+      "keywords": ["POSIX Shell", "PowerShell", "Batch"]
+    },
+    {
+      "name": "Programming Languages",
+      "level": "Advanced",
+      "keywords": ["C#", "Python", "PHP", "TypeScript", "JavaScript", "Java", "Go", "Rust", "C", "C++"]
+    },
+    {
+      "name": "Frontend",
+      "level": "Intermediate",
+      "keywords": ["HTML", "JQuery", "React", "TypeScript", "HTML5", "CSS3", "Tailwind"]
+    },
+    {
+      "name": "Backend",
+      "level": "Advanced",
+      "keywords": ["ASP.NET", "Flask", "FastAPI", "Django", "Node.js", "PHP"]
+    },
+    {
+      "name": "Data",
+      "level": "Advanced",
+      "keywords": ["PostgresSQL", "MySQL", "SQL Server", "MongoDB", "Supabase", "Kafka", "Spark", "Databricks", "Redis"]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "level": "Advanced",
+      "keywords": ["Azure", "AWS", "Docker", "Kubernetes", "Github Actions", "Azure Devops", "Jenkins"]
+    },
+    {
+      "name": "Agentic Harnesses",
+      "level": "Intermediate",
+      "keywords": [ "Pi", "Hermes", "Codex", "Claude Code", "OpenCode", "GitHub Copilot" ]
+    },
+    {
+      "name": "Open Weight Models",
+      "level": "Intermediate",
+      "keywords": ["Qwen", "Gemini", "Kimi", "DeepSeek", "MiniMax", "GLM", "Mini-CPM5"]
+    },
+    {
+      "name": "AI Tooling",
+      "level": "Intermediate",
+      "keywords": ["Voice Cloning", "Voice Generation", "Image Generation", "Skills Creation"]
+    }
+  ],
+  "languages": ["English", "Some Cantonese"],
+  "interests": ["Coding", "Hacking", "CyberSecurity", "AI", "Science", "Martial Arts"],
+  "references": [
+    "https://www.linkedin.com/in/jeff-jin-hung-tong/details/recommendations"
+  ],
+  "projects": [
+    {
+      "name": "Code Chronicles",
+      "startDate": "",
+      "endDate": "",
+      "description": "Personal blog focused on InfoSec and software engineering topics.",
+      "highlights": [],
+      "url": "https://dev.hashnode.dev"
+    },
+    {
+      "name": "OWASP Wrong Secrets",
+      "startDate": "",
+      "endDate": "",
+      "description": "Contributed fix for a challenge issue.",
+      "highlights": [
+        "Issue: https://github.com/OWASP/wrongsecrets/issues/1279"
+      ],
+      "url": "https://github.com/OWASP/wrongsecrets"
+    },
+    {
+      "name": "Navi",
+      "startDate": "",
+      "endDate": "",
+      "description": "Contributed improvements for better Windows support.",
+      "highlights": [
+        "Pull request: https://github.com/denisidoro/navi/pull/1007"
+      ],
+      "url": "https://github.com/denisidoro/navi"
+    },
+    {
+      "name": "PathFinder",
+      "startDate": "",
+      "endDate": "",
+      "description": "Automated cybersecurity reconnaissance tool.",
+      "highlights": [],
+      "url": "https://github.com/wind010/PathFinder"
+    }
+  ]
+}

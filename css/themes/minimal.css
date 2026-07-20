@@ -1,0 +1,345 @@
+body[data-theme="minimal"] {
+  --bg: #f2f4f8;
+  --panel: #ffffff;
+  --text: #1a1a1a;
+  --dim: #374151;
+  --accent: #111a2d;
+  --line: #dfe4ee;
+  --link: #2563eb;
+  --link-hover: #1d4ed8;
+  --font-main: "Inter", -apple-system, system-ui, sans-serif;
+  --font-size-main: 14px;
+  --line-height-main: 1.6;
+  --panel-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+  --panel-radius: 10px;
+  --grain-opacity: 0;
+  --page-max-width: min(1080px, calc(100vw - 2rem));
+  --page-padding: 2rem;
+  --section-gap: 1.5rem;
+  --h2-size: 16px;
+  --h2-letter: 0.05em;
+  --h2-transform: uppercase;
+  --h2-margin: 0 0 1.25rem;
+}
+
+body[data-theme="minimal"] .manpage {
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+body[data-theme="minimal"] .section-name,
+body[data-theme="minimal"] .section-synopsis {
+  display: none;
+}
+
+body[data-theme="minimal"] .man-head,
+body[data-theme="minimal"] .man-foot {
+  display: none;
+}
+
+body[data-theme="minimal"] .manpage::before {
+  content: attr(data-profile);
+  display: block;
+  white-space: normal;
+  font-size: 3rem;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--accent);
+  padding-bottom: 0;
+  margin-bottom: 0.35rem;
+  border-bottom: none;
+  text-align: center;
+}
+
+body[data-theme="minimal"] .section-contact {
+  order: 1;
+  margin-top: 0;
+}
+
+body[data-theme="minimal"] .section-contact::before {
+  content: attr(data-role);
+  display: block;
+  color: var(--link);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+  text-align: center;
+}
+
+body[data-theme="minimal"] .section-description {
+  order: 2;
+}
+
+body[data-theme="minimal"] .section-skills {
+  order: 3;
+}
+
+body[data-theme="minimal"] .section-work {
+  order: 4;
+}
+
+body[data-theme="minimal"] .section-projects {
+  order: 5;
+}
+
+body[data-theme="minimal"] .section-education {
+  order: 6;
+}
+
+body[data-theme="minimal"] .section-languages {
+  order: 7;
+}
+
+body[data-theme="minimal"] .section-interests {
+  order: 8;
+}
+
+body[data-theme="minimal"] .section-contact h2 {
+  display: none;
+}
+
+body[data-theme="minimal"] #contactInfo {
+  color: color-mix(in srgb, var(--dim) 72%, white 28%);
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  column-gap: 0;
+  row-gap: 0;
+}
+
+body[data-theme="minimal"] .info-row {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  font-weight: 400;
+  color: inherit;
+}
+
+body[data-theme="minimal"] #contactInfo a {
+  color: inherit;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+body[data-theme="minimal"] #contactInfo a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+body[data-theme="minimal"] .info-email {
+  order: 1;
+}
+
+body[data-theme="minimal"] .info-github {
+  order: 2;
+  display: inline-flex;
+}
+
+body[data-theme="minimal"] .info-linkedin {
+  order: 3;
+  display: inline-flex;
+}
+
+body[data-theme="minimal"] .info-location {
+  order: 4;
+}
+
+body[data-theme="minimal"] .info-website {
+  display: none;
+}
+
+body[data-theme="minimal"] .info-row + .info-row::before {
+  content: "•";
+  color: color-mix(in srgb, var(--text) 65%, transparent);
+  margin: 0 0.35rem 0 0.35rem;
+}
+
+body[data-theme="minimal"] .info-row .label {
+  display: none;
+}
+
+body[data-theme="minimal"] .info-github .label,
+body[data-theme="minimal"] .info-linkedin .label {
+  display: inline !important;
+  width: auto !important;
+  margin-right: 0.12rem;
+  margin-left: 0;
+  vertical-align: baseline;
+  font-weight: 400;
+  color: inherit;
+}
+
+body[data-theme="minimal"] #contactInfo {
+  line-height: 1.25;
+}
+
+body[data-theme="minimal"] .manpage::after {
+  content: "Last updated: " attr(data-updated);
+  display: block;
+  order: 99;
+  width: 100%;
+  margin-top: 1.55rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+
+body[data-theme="minimal"] h2 {
+  color: var(--accent);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--link);
+}
+
+body[data-theme="minimal"] .item-title,
+body[data-theme="minimal"] #nameLine,
+body[data-theme="minimal"] #synopsisLine,
+body[data-theme="minimal"] #descriptionLine,
+body[data-theme="minimal"] #languagesLine,
+body[data-theme="minimal"] #interestsLine,
+body[data-theme="minimal"] .info-row,
+body[data-theme="minimal"] .skills-grid,
+body[data-theme="minimal"] .item-dates,
+body[data-theme="minimal"] .item-summary,
+body[data-theme="minimal"] ul,
+body[data-theme="minimal"] .skill-row span:last-child {
+  margin-left: 0;
+}
+
+body[data-theme="minimal"] ul {
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+
+body[data-theme="minimal"] .section-description h2 {
+  display: none;
+}
+
+body[data-theme="minimal"] .section-description p {
+  color: var(--dim);
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+body[data-theme="minimal"] .section-skills .skill-row {
+  margin-bottom: 0.35rem;
+  line-height: 1.45;
+}
+
+body[data-theme="minimal"] .section-skills .skill-name {
+  display: inline;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+
+body[data-theme="minimal"] .section-skills .skill-name::after {
+  content: ": ";
+}
+
+body[data-theme="minimal"] .section-skills .skill-row span:last-child {
+  display: inline;
+  margin-left: 0;
+  color: var(--text);
+}
+
+body[data-theme="minimal"] .item-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+body[data-theme="minimal"] .job .item-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+body[data-theme="minimal"] .job .item-company-inline {
+  display: block;
+  color: var(--accent);
+}
+
+body[data-theme="minimal"] .job .item-title-sep,
+body[data-theme="minimal"] .job .item-title-sep {
+  display: none;
+}
+
+body[data-theme="minimal"] .job .item-role {
+  display: block;
+  color: var(--link);
+  font-weight: 400;
+}
+
+body[data-theme="minimal"] .job .item-company {
+  display: none;
+}
+
+body[data-theme="minimal"] .item-dates {
+  color: var(--dim);
+  font-size: 14px;
+  text-align: right;
+  font-style: normal;
+}
+
+body[data-theme="minimal"] .item-summary {
+  color: var(--dim);
+}
+
+body[data-theme="minimal"] .job,
+body[data-theme="minimal"] .project,
+body[data-theme="minimal"] .edu {
+  margin-bottom: 1.75rem;
+}
+
+body[data-theme="minimal"] ul {
+  margin-top: 0.6rem;
+}
+
+@media (max-width: 768px) {
+  body[data-theme="minimal"] {
+    --page-padding: 1.4rem 1.15rem;
+    --h2-size: 15px;
+    --h2-letter: 0.04em;
+  }
+
+  body[data-theme="minimal"] .manpage::before {
+    font-size: 2.2rem;
+  }
+
+  body[data-theme="minimal"] #contactInfo {
+    font-size: 0.84rem;
+  }
+
+  body[data-theme="minimal"] .item-head {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  body[data-theme="minimal"] .item-dates {
+    text-align: left;
+  }
+}
+
+body[data-theme="minimal"] li::before {
+  content: "";
+}
+
+body[data-theme="minimal"] .fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: reveal 420ms ease forwards;
+}

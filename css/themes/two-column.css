@@ -1,0 +1,279 @@
+body[data-theme="two-column"] {
+  --bg: #f5f5f5;
+}
+
+body[data-theme="two-column"] .grain {
+  display: none;
+}
+
+.resume.two-column {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgb(26, 26, 26);
+  display: grid;
+  grid-template-columns: 320px 1fr;
+}
+
+.resume.two-column .sidebar {
+  background: rgb(30, 41, 59);
+  color: rgb(226, 232, 240);
+  padding: 50px 30px;
+}
+
+.resume.two-column .main-content {
+  padding: 50px 50px 50px 40px;
+}
+
+.resume.two-column .sidebar .resume-header {
+  margin-bottom: 40px;
+}
+
+.resume.two-column .sidebar h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: rgb(255, 255, 255);
+  line-height: 1.2;
+}
+
+.resume.two-column .sidebar .subtitle {
+  font-size: 14px;
+  color: rgb(96, 165, 250);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.resume.two-column .sidebar section {
+  margin-bottom: 36px;
+}
+
+.resume.two-column .sidebar h2 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgb(96, 165, 250);
+  margin: 0 0 16px;
+}
+
+.resume.two-column .sidebar h3 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(148, 163, 184);
+  margin: 0 0 8px;
+}
+
+.resume.two-column .contact .contact-item {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: rgb(203, 213, 225);
+}
+
+.resume.two-column .skill-group {
+  margin-bottom: 24px;
+}
+
+.resume.two-column .skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.resume.two-column .tag {
+  background: rgb(51, 65, 85);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: rgb(226, 232, 240);
+  font-weight: 500;
+}
+
+.resume.two-column .sidebar .school {
+  margin-bottom: 20px;
+}
+
+.resume.two-column .sidebar .school h3 {
+  font-size: 13px;
+  color: rgb(241, 245, 249);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 6px;
+}
+
+.resume.two-column .sidebar .school .dates {
+  font-size: 11px;
+  color: rgb(148, 163, 184);
+  margin-bottom: 8px;
+}
+
+.resume.two-column .sidebar .school ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  list-style: disc;
+}
+
+.resume.two-column .sidebar .school li {
+  margin-bottom: 4px;
+  color: rgb(203, 213, 225);
+}
+
+.resume.two-column .main-content .summary {
+  margin-bottom: 40px;
+}
+
+.resume.two-column .main-content .summary p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgb(55, 65, 81);
+}
+
+.resume.two-column .main-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(17, 24, 39);
+  margin: 0 0 24px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid rgb(37, 99, 235);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.resume.two-column .main-content .job {
+  margin-bottom: 32px;
+}
+
+.resume.two-column .main-content .job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 20px;
+}
+
+.resume.two-column .main-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: rgb(17, 24, 39);
+}
+
+.resume.two-column .main-content .company {
+  font-size: 14px;
+  color: rgb(37, 99, 235);
+  font-weight: 500;
+}
+
+.resume.two-column .main-content .dates {
+  font-size: 13px;
+  color: rgb(107, 114, 128);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.resume.two-column .main-content .job-summary {
+  margin: 8px 0;
+  font-style: italic;
+  color: rgb(75, 85, 99);
+  font-size: 13px;
+}
+
+.resume.two-column .main-content .highlights {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.resume.two-column .main-content .highlights li {
+  margin-bottom: 8px;
+  color: rgb(55, 65, 81);
+}
+
+@media (max-width: 968px) {
+  .resume.two-column {
+    grid-template-columns: 280px 1fr;
+  }
+
+  .resume.two-column .sidebar {
+    padding: 40px 24px;
+  }
+
+  .resume.two-column .main-content {
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .resume.two-column {
+    grid-template-columns: 1fr;
+    font-size: 12px;
+  }
+
+  .resume.two-column .sidebar {
+    padding: 30px 20px;
+    background: rgb(15, 23, 42);
+  }
+
+  .resume.two-column .sidebar h1 {
+    font-size: 24px;
+  }
+
+  .resume.two-column .sidebar .subtitle {
+    font-size: 13px;
+  }
+
+  .resume.two-column .main-content {
+    padding: 30px 20px;
+  }
+
+  .resume.two-column .main-content .job-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .resume.two-column .main-content .dates {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .resume.two-column {
+    font-size: 11px;
+  }
+
+  .resume.two-column .sidebar {
+    padding: 20px 16px;
+  }
+
+  .resume.two-column .sidebar h1 {
+    font-size: 20px;
+  }
+
+  .resume.two-column .main-content {
+    padding: 20px 16px;
+  }
+
+  .resume.two-column .main-content h2 {
+    font-size: 18px;
+  }
+
+  .resume.two-column .main-content h3 {
+    font-size: 15px;
+  }
+}
+
+@media print {
+  .resume.two-column {
+    box-shadow: none;
+  }
+}
