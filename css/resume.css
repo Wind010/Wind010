@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap");
-@import url("themes/terminal.css");
+@import url("themes/terminal.css?v=20260719b");
 @import url("themes/minimal.css");
 @import url("themes/two-column.css");
 @import url("themes/bold-header.css");
@@ -21,7 +21,7 @@
   --panel-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   --panel-radius: 0;
   --grain-opacity: 0;
-  --page-max-width: 100ch;
+  --page-max-width: 112ch;
   --page-padding: 3em 5em;
   --section-gap: 2em;
   --h2-size: 15px;
@@ -184,6 +184,13 @@ body[data-theme="lcars"] .theme-dock.lcars-menu-open .theme-icon {
   font-size: 18px;
   line-height: 1;
   font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
+}
+
+.theme-option-icon-svg {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex: 0 0 18px;
 }
 
 .theme-option:hover,
@@ -410,9 +417,9 @@ li::before {
 }
 
 @media (min-width: 1400px) {
-  .manpage {
+  body[data-theme="man"] .manpage {
     font-size: 16px;
-    max-width: 95ch;
+    max-width: 108ch;
     padding: 3.5em 6em;
   }
 

@@ -32,7 +32,7 @@ body[data-theme="terminal"] .manpage {
 }
 
 body[data-theme="terminal"] .manpage::before {
-  content: "● ● ●   bash - 80x24";
+  content: "● ● ●   zsh - 80x24";
   display: block;
   background: #1a1a1a;
   border-bottom: 1px solid #00ff00;
@@ -95,10 +95,7 @@ body[data-theme="terminal"] #nameLine {
 }
 
 body[data-theme="terminal"] .section-synopsis {
-  order: 2;
-  padding: 0 40px 14px;
-  border-bottom: none;
-  background: #0d0d0d;
+  display: none;
 }
 
 body[data-theme="terminal"] .section-synopsis h2 {
@@ -381,6 +378,18 @@ body[data-theme="terminal"] .section-work ul {
 }
 
 body[data-theme="terminal"] .section-work li {
+  margin-bottom: 8px;
+  padding-left: 40px;
+  position: relative;
+}
+
+body[data-theme="terminal"] .section-projects ul {
+  margin: 12px 0 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+body[data-theme="terminal"] .section-projects li {
   margin-bottom: 8px;
   padding-left: 40px;
   position: relative;
