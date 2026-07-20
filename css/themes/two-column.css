@@ -77,6 +77,10 @@ body[data-theme="two-column"] .grain {
   color: rgb(203, 213, 225);
 }
 
+.resume.two-column .sidebar a {
+  color: rgb(255, 255, 255);
+}
+
 .resume.two-column .skill-group {
   margin-bottom: 24px;
 }

@@ -48,6 +48,10 @@ body[data-theme="bold-header"] .grain {
   font-weight: 400;
 }
 
+.resume.bold-header .resume-header .contact a {
+  color: #ffffff;
+}
+
 .resume.bold-header .summary {
   padding: 40px 60px;
   background: #f8fafc;
