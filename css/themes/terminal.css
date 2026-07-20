@@ -1,0 +1,432 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+body[data-theme="terminal"] {
+  --bg: #0a0a0a;
+  --panel: #0a0a0a;
+  --text: #00ff00;
+  --dim: #00cc00;
+  --accent: #00ff00;
+  --line: #003300;
+  --link: #9bffa2;
+  --link-hover: #c6ffcb;
+  --font-main: "JetBrains Mono", "IBM Plex Mono", Menlo, Consolas, monospace;
+  --font-size-main: 13px;
+  --line-height-main: 1.6;
+  --panel-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
+  --panel-radius: 8px;
+  --grain-opacity: 0;
+  --page-max-width: min(1240px, calc(100vw - 1rem));
+  --page-padding: 0;
+  --section-gap: 1rem;
+  --h2-size: 16px;
+  --h2-transform: uppercase;
+  --h2-letter: 0.15em;
+  --h2-margin: 0 0 1.25rem;
+}
+
+body[data-theme="terminal"] .manpage {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #00ff00;
+  overflow: hidden;
+}
+
+body[data-theme="terminal"] .manpage::before {
+  content: "● ● ●   bash - 80x24";
+  display: block;
+  background: #1a1a1a;
+  border-bottom: 1px solid #00ff00;
+  padding: 8px 16px;
+  color: #666666;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+body[data-theme="terminal"] .manpage::after {
+  content: none;
+}
+
+body[data-theme="terminal"] .man-head,
+body[data-theme="terminal"] .man-foot {
+  display: none;
+}
+
+body[data-theme="terminal"] section {
+  margin: 0;
+  padding: 30px 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+body[data-theme="terminal"] section:last-of-type {
+  border-bottom: none;
+}
+
+body[data-theme="terminal"] h2::before {
+  content: "# ";
+  color: var(--accent);
+}
+
+body[data-theme="terminal"] .section-name {
+  order: 1;
+  padding: 40px 40px 30px;
+  border-bottom: none;
+  background: #0d0d0d;
+}
+
+body[data-theme="terminal"] .section-name::before {
+  content: "$ whoami";
+  display: block;
+  color: #00ff00;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+body[data-theme="terminal"] .section-name h2 {
+  display: none;
+}
+
+body[data-theme="terminal"] #nameLine {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+body[data-theme="terminal"] .section-synopsis {
+  order: 2;
+  padding: 0 40px 14px;
+  border-bottom: none;
+  background: #0d0d0d;
+}
+
+body[data-theme="terminal"] .section-synopsis h2 {
+  display: none;
+}
+
+body[data-theme="terminal"] #synopsisLine {
+  margin: 0;
+  color: #00cc00;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+body[data-theme="terminal"] .section-contact {
+  order: 3;
+  padding: 0 40px 30px;
+  border-bottom: 1px solid #00ff00;
+  background: #0d0d0d;
+}
+
+body[data-theme="terminal"] .section-contact h2 {
+  display: none;
+}
+
+body[data-theme="terminal"] #contactInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  align-items: center;
+}
+
+body[data-theme="terminal"] .section-contact .info-row {
+  margin: 0;
+  color: #009900;
+}
+
+body[data-theme="terminal"] .section-contact .info-row::before {
+  content: "> ";
+  color: #00ff00;
+}
+
+body[data-theme="terminal"] .section-contact .label {
+  color: #009900;
+  width: auto;
+  font-weight: 500;
+}
+
+body[data-theme="terminal"] .section-contact a {
+  color: #009900;
+}
+
+body[data-theme="terminal"] .section-contact a:hover {
+  color: #00cc00;
+}
+
+body[data-theme="terminal"] .item-title,
+body[data-theme="terminal"] #nameLine,
+body[data-theme="terminal"] #synopsisLine,
+body[data-theme="terminal"] #descriptionLine,
+body[data-theme="terminal"] #languagesLine,
+body[data-theme="terminal"] #interestsLine,
+body[data-theme="terminal"] .info-row,
+body[data-theme="terminal"] .skills-grid,
+body[data-theme="terminal"] .item-dates,
+body[data-theme="terminal"] .item-summary,
+body[data-theme="terminal"] ul,
+body[data-theme="terminal"] .skill-row span:last-child {
+  margin-left: 0;
+}
+
+body[data-theme="terminal"] .section-description {
+  order: 4;
+  background: #0d0d0d;
+}
+
+body[data-theme="terminal"] .section-description h2 {
+  display: none;
+}
+
+body[data-theme="terminal"] .section-skills {
+  order: 5;
+}
+
+body[data-theme="terminal"] .section-skills .skills-grid {
+  display: grid;
+  gap: 16px;
+  background: #0d0d0d;
+  padding: 20px;
+  border: 1px solid #003300;
+  border-radius: 4px;
+}
+
+body[data-theme="terminal"] .section-skills .skill-row {
+  margin: 0;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.6;
+}
+
+body[data-theme="terminal"] .section-skills .skill-row::before {
+  content: "├─";
+  position: absolute;
+  left: 0;
+  color: #00ff00;
+}
+
+body[data-theme="terminal"] .section-skills .skill-row:last-child::before {
+  content: "└─";
+}
+
+body[data-theme="terminal"] .section-skills .skill-name {
+  display: inline;
+  color: #ffff00;
+  font-weight: 700;
+  margin: 0;
+}
+
+body[data-theme="terminal"] .section-skills .skill-name::after {
+  content: " ";
+}
+
+body[data-theme="terminal"] .section-skills .skill-row span:last-child {
+  display: inline;
+  margin-left: 0;
+  color: #00cc00;
+}
+
+body[data-theme="terminal"] .section-work {
+  order: 6;
+}
+
+body[data-theme="terminal"] .section-projects {
+  order: 7;
+}
+
+body[data-theme="terminal"] .section-education {
+  order: 8;
+}
+
+body[data-theme="terminal"] .section-languages {
+  order: 9;
+}
+
+body[data-theme="terminal"] .section-interests {
+  order: 10;
+}
+
+body[data-theme="terminal"] .section-description::before {
+  content: "$ cat ~/.profile  # About Me";
+  display: block;
+  color: #00ff00;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+body[data-theme="terminal"] #descriptionLine {
+  color: #00cc00;
+  line-height: 1.7;
+  padding-left: 20px;
+  position: relative;
+}
+
+body[data-theme="terminal"] #descriptionLine::before {
+  content: "|";
+  position: absolute;
+  left: 0;
+  color: #00ff00;
+}
+
+body[data-theme="terminal"] .job,
+body[data-theme="terminal"] .project,
+body[data-theme="terminal"] .edu {
+  border: 1px solid #003300;
+  border-left: 3px solid #00ff00;
+  border-radius: 4px;
+  background: #0d0d0d;
+  margin-bottom: 24px;
+  padding: 16px;
+}
+
+body[data-theme="terminal"] .section-work .job {
+  margin-bottom: 32px;
+  padding: 20px;
+  position: relative;
+}
+
+body[data-theme="terminal"] .section-work .job::before {
+  content: ">";
+  position: absolute;
+  left: -12px;
+  top: 20px;
+  color: #00ff00;
+  font-weight: 700;
+}
+
+body[data-theme="terminal"] .job:last-child,
+body[data-theme="terminal"] .project:last-child,
+body[data-theme="terminal"] .edu:last-child {
+  margin-bottom: 0;
+}
+
+body[data-theme="terminal"] .item-title {
+  color: #ffff00;
+  font-weight: 700;
+}
+
+body[data-theme="terminal"] .section-work .item-head {
+  margin-bottom: 8px;
+}
+
+body[data-theme="terminal"] .section-work .item-title {
+  display: inline;
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.3;
+}
+
+body[data-theme="terminal"] .section-work .item-company-inline,
+body[data-theme="terminal"] .section-work .item-title-sep {
+  display: none;
+}
+
+body[data-theme="terminal"] .section-work .item-role {
+  color: #ffff00;
+}
+
+body[data-theme="terminal"] .section-work .item-title::before {
+  content: "$";
+  position: absolute;
+  left: 0;
+  color: #00ff00;
+}
+
+body[data-theme="terminal"] .section-work .item-company {
+  display: block;
+  font-size: 13px;
+  color: #00ffff;
+  font-weight: 500;
+  padding-left: 20px;
+  margin-top: 4px;
+}
+
+body[data-theme="terminal"] .item-dates {
+  color: #888888;
+  font-size: 11px;
+  font-weight: 600;
+  background: #1a1a1a;
+  border: 1px solid #003300;
+  border-radius: 3px;
+  padding: 3px 8px;
+  display: inline-block;
+  font-style: normal;
+}
+
+body[data-theme="terminal"] .section-work .item-dates {
+  margin-left: 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+body[data-theme="terminal"] .item-summary,
+body[data-theme="terminal"] li,
+body[data-theme="terminal"] .skill-row span:last-child,
+body[data-theme="terminal"] .info-row {
+  color: #00cc00;
+}
+
+body[data-theme="terminal"] .section-work .item-summary {
+  margin: 12px 0;
+  font-style: italic;
+  padding-left: 20px;
+  border-left: 2px solid #003300;
+}
+
+body[data-theme="terminal"] .section-work ul {
+  margin: 12px 0 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+body[data-theme="terminal"] .section-work li {
+  margin-bottom: 8px;
+  padding-left: 40px;
+  position: relative;
+}
+
+body[data-theme="terminal"] .skill-name,
+body[data-theme="terminal"] .info-row .label {
+  color: #00ff00;
+}
+
+body[data-theme="terminal"] li::before {
+  content: "└──>";
+  left: 0;
+  color: #00ff00;
+  font-weight: 500;
+}
+
+body[data-theme="terminal"] .fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: reveal 420ms ease forwards;
+}
+
+body[data-theme="terminal"] .section-interests::after {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 16px;
+  margin-top: 14px;
+  background: #00ff00;
+  animation: terminal-blink 1s step-end infinite;
+}
+
+@keyframes terminal-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  body[data-theme="terminal"] .section-interests::after {
+    margin-top: 10px;
+  }
+}
