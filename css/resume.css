@@ -4,6 +4,7 @@
 @import url("themes/two-column.css");
 @import url("themes/bold-header.css");
 @import url("themes/timeline.css");
+@import url("themes/lcars.css");
 
 :root {
   --bg: #e8e8e8;
@@ -79,13 +80,13 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--line) 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 18%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, var(--panel) 90%, transparent);
-  color: color-mix(in srgb, var(--text) 80%, transparent);
-  opacity: 0.65;
+  background: color-mix(in srgb, var(--panel) 48%, transparent);
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+  opacity: 0.2;
   font-size: 14px;
   box-shadow: none;
 }
@@ -143,14 +144,28 @@ body {
   pointer-events: auto;
 }
 
+body[data-theme="lcars"] .theme-dock.lcars-menu-open .theme-flyout {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 .theme-dock:hover .theme-icon,
 .theme-dock:focus-within .theme-icon {
   opacity: 1;
   color: var(--text);
 }
 
+body[data-theme="lcars"] .theme-dock.lcars-menu-open .theme-icon {
+  opacity: 1;
+  color: var(--text);
+}
+
 .theme-option {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   border: none;
   border-radius: 5px;
@@ -163,6 +178,12 @@ body {
   cursor: pointer;
   white-space: nowrap;
   transition: transform 150ms ease, background 150ms ease;
+}
+
+.theme-option-icon {
+  font-size: 18px;
+  line-height: 1;
+  font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
 }
 
 .theme-option:hover,

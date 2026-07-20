@@ -8,10 +8,19 @@ const THEMES = [
   { id: "minimal", label: "Modern Minimal" },
   { id: "two-column", label: "Two-Column" },
   { id: "bold-header", label: "Bold Header" },
-  { id: "timeline", label: "Timeline" }
+  { id: "timeline", label: "Timeline" },
+  { id: "lcars", label: "LCARS" }
 ];
 const DEFAULT_THEME = "man";
+const LCARS_CLICK_SOUND_URLS = [
+  "https://www.thelcars.com/assets/beep1.mp3",
+  "https://www.thelcars.com/assets/beep2.mp3",
+  "https://www.thelcars.com/assets/beep3.mp3",
+  "https://www.thelcars.com/assets/beep4.mp3"
+];
 let resumeDataCache = null;
+let lcarsClickAudioByUrl = {};
+let lcarsLastClickAt = 0;
 
 const DEFAULT_MANPAGE_TEMPLATE = `
   <header class="man-head">
@@ -182,6 +191,13 @@ function updateFullToggleButton() {
   toggle.classList.toggle("active", enabled);
 }
 
+function toggleFullResumeMode() {
+  const next = !useFullResumeFromUrl();
+  syncFullToUrl(next);
+  updateFullToggleButton();
+  loadResume();
+}
+
 function initFullToggle() {
   const toggle = byId("fullToggle");
   if (!toggle) {
@@ -190,11 +206,42 @@ function initFullToggle() {
 
   updateFullToggleButton();
   toggle.addEventListener("click", () => {
-    const next = !useFullResumeFromUrl();
-    syncFullToUrl(next);
-    updateFullToggleButton();
-    loadResume();
+    toggleFullResumeMode();
   });
+}
+
+function toggleThemeFlyoutFromLcars() {
+  const dock = document.querySelector(".theme-dock");
+  if (!(dock instanceof HTMLElement)) {
+    return;
+  }
+
+  const flyout = dock.querySelector(".theme-flyout");
+
+  const setOpen = (open) => {
+    dock.classList.toggle("lcars-menu-open", open);
+    if (flyout instanceof HTMLElement) {
+      if (open) {
+        flyout.style.setProperty("opacity", "1", "important");
+        flyout.style.setProperty("visibility", "visible", "important");
+        flyout.style.setProperty("transform", "translateY(0)", "important");
+        flyout.style.setProperty("pointer-events", "auto", "important");
+      } else {
+        flyout.style.removeProperty("opacity");
+        flyout.style.removeProperty("visibility");
+        flyout.style.removeProperty("transform");
+        flyout.style.removeProperty("pointer-events");
+      }
+    }
+  };
+
+  const isOpen = dock.classList.contains("lcars-menu-open");
+  if (isOpen) {
+    setOpen(false);
+    return;
+  }
+
+  setOpen(true);
 }
 
 function applySectionTitles(theme) {
@@ -239,6 +286,126 @@ function initTheme() {
     button.addEventListener("click", () => {
       setTheme(button.dataset.themeOption || DEFAULT_THEME);
     });
+  });
+}
+
+function getLcarsClickAudio() {
+  const randomIndex = Math.floor(Math.random() * LCARS_CLICK_SOUND_URLS.length);
+  const url = LCARS_CLICK_SOUND_URLS[randomIndex];
+  if (!lcarsClickAudioByUrl[url]) {
+    const audio = new Audio(url);
+    audio.preload = "auto";
+    lcarsClickAudioByUrl[url] = audio;
+  }
+  return lcarsClickAudioByUrl[url];
+}
+
+function playLcarsClickSound() {
+  if (getCurrentTheme() !== "lcars") {
+    return;
+  }
+
+  const now = performance.now();
+  if (now - lcarsLastClickAt < 35) {
+    return;
+  }
+  lcarsLastClickAt = now;
+
+  const audio = getLcarsClickAudio();
+  if (!audio) {
+    return;
+  }
+
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
+}
+
+function initLcarsClickSound() {
+  document.addEventListener("pointerdown", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const interactive = target.closest("button, #main_nav a, .theme-option, .full-toggle");
+    if (!interactive) {
+      return;
+    }
+
+    playLcarsClickSound();
+  }, { passive: true });
+}
+
+function initLcarsSectionNav() {
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const link = target.closest("#main_nav a");
+    if (!link) {
+      return;
+    }
+
+    const href = link.getAttribute("href") || "";
+    if (!href.startsWith("#") || href.length < 2) {
+      return;
+    }
+
+    const section = document.querySelector(href);
+    if (!(section instanceof Element)) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const header = document.getElementById("main_header");
+    const headerOffset = header ? header.getBoundingClientRect().height + 12 : 12;
+    const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+    const scrollTop = Math.max(0, sectionTop - headerOffset);
+
+    window.scrollTo({
+      top: scrollTop,
+      behavior: "auto"
+    });
+  });
+}
+
+function initLcarsHeaderControls() {
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element) || getCurrentTheme() !== "lcars") {
+      return;
+    }
+
+    const viewportBtn = target.closest("#viewport-btn");
+    if (viewportBtn) {
+      toggleFullResumeMode();
+      return;
+    }
+
+    const optionsBtn = target.closest("#menu-btn");
+    if (optionsBtn) {
+      toggleThemeFlyoutFromLcars();
+      return;
+    }
+
+    const dock = document.querySelector(".theme-dock");
+    if (!(dock instanceof HTMLElement)) {
+      return;
+    }
+
+    if (!target.closest(".theme-dock")) {
+      dock.classList.remove("lcars-menu-open");
+      const flyout = dock.querySelector(".theme-flyout");
+      if (flyout instanceof HTMLElement) {
+        flyout.style.removeProperty("opacity");
+        flyout.style.removeProperty("visibility");
+        flyout.style.removeProperty("transform");
+        flyout.style.removeProperty("pointer-events");
+      }
+    }
   });
 }
 
@@ -306,28 +473,47 @@ function pickProfile(profiles, networkName) {
   return profiles.find((p) => String(p.network || "").toLowerCase() === networkName.toLowerCase());
 }
 
-function getUniqueProfileValues(profiles) {
-  const seen = new Set();
-  return normalizeList(profiles)
-    .map((profile) => (profile && (profile.username || profile.url || "") ? String(profile.username || profile.url).trim() : ""))
-    .filter(Boolean)
-    .filter((value) => {
-      const key = value.toLowerCase();
-      if (seen.has(key)) {
-        return false;
-      }
-      seen.add(key);
-      return true;
+function buildContactItems(basics) {
+  const profiles = normalizeList(basics.profiles);
+  const github = pickProfile(profiles, "github");
+  const linkedin = pickProfile(profiles, "linkedin");
+  const location = basics.location || {};
+  const items = [];
+
+  if (basics.email) {
+    items.push({
+      text: basics.email,
+      url: `mailto:${basics.email}`
     });
+  }
+
+  if (github && github.url) {
+    items.push({
+      text: `GitHub: ${github.username || github.url}`,
+      url: github.url
+    });
+  }
+
+  if (linkedin && linkedin.url) {
+    items.push({
+      text: `LinkedIn: ${linkedin.username || linkedin.url}`,
+      url: linkedin.url
+    });
+  }
+
+  const locationText = [location.city, location.region].filter(Boolean).join(", ");
+  if (locationText) {
+    items.push({ text: locationText });
+  }
+
+  return items;
 }
 
-function buildContactParts(basics) {
-  const location = basics.location || {};
-  return [
-    basics.email || "",
-    ...getUniqueProfileValues(basics.profiles),
-    [location.city, location.region].filter(Boolean).join(", ")
-  ].filter(Boolean);
+function renderContactItem(item) {
+  if (item.url) {
+    return `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.text)}</a>`;
+  }
+  return escapeHtml(item.text);
 }
 
 function renderContact(resume) {
@@ -511,7 +697,14 @@ function renderTwoColumn(data) {
         <h2>Contact</h2>
         ${basics.email ? `<div class="contact-item">${escapeHtml(basics.email)}</div>` : ""}
         ${profiles
-          .map((p) => `<div class="contact-item">${escapeHtml(p.network || "Profile")}: ${escapeHtml(p.username || p.url || "")}</div>`)
+          .map((p) => {
+            const network = escapeHtml(p.network || "Profile");
+            const value = escapeHtml(p.username || p.url || "");
+            const link = p.url
+              ? `<a href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer">${value}</a>`
+              : value;
+            return `<div class="contact-item">${network}: ${link}</div>`;
+          })
           .join("")}
         ${(location.city || location.region)
           ? `<div class="contact-item">${escapeHtml([location.city, location.region].filter(Boolean).join(", "))}</div>`
@@ -577,14 +770,14 @@ function renderBoldHeader(data) {
   const work = normalizeList(data.work);
   const education = normalizeList(data.education);
   const skills = normalizeList(data.skills);
-  const contactParts = buildContactParts(basics);
+  const contactItems = buildContactItems(basics);
 
   return `
     <div class="resume-header">
       <div class="header-content">
         <h1>${escapeHtml(basics.name || "")}</h1>
         <div class="subtitle">${escapeHtml(basics.label || "")}</div>
-        <div class="contact">${escapeHtml(contactParts.join(" • "))}</div>
+        <div class="contact">${contactItems.map((item) => renderContactItem(item)).join(" • ")}</div>
       </div>
     </div>
 
@@ -641,14 +834,14 @@ function renderTimeline(data) {
   const work = normalizeList(data.work);
   const education = normalizeList(data.education);
   const skills = normalizeList(data.skills);
-  const contactParts = buildContactParts(basics);
+  const contactItems = buildContactItems(basics);
 
   return `
     <header class="resume-header">
       <h1>${escapeHtml(basics.name || "")}</h1>
       <div class="subtitle">${escapeHtml(basics.label || "")}</div>
       <div class="contact">
-        ${contactParts.map((part) => `<span>${escapeHtml(part)}</span>`).join("<span>•</span>")}
+        ${contactItems.map((item) => `<span>${renderContactItem(item)}</span>`).join("<span>•</span>")}
       </div>
     </header>
 
@@ -698,6 +891,172 @@ function renderTimeline(data) {
       <h2>Education</h2>
       ${renderTwoColumnEducation(education)}
     </section>
+  `;
+}
+
+function renderLcars(data) {
+  const basics = data.basics || {};
+  const work = normalizeList(data.work);
+  const education = normalizeList(data.education);
+  const skills = normalizeList(data.skills);
+  const projects = normalizeList(data.projects);
+  const contactItems = buildContactItems(basics);
+  const currentTime = new Date().toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  });
+
+  return `
+    <div class="container lcars-shell">
+      <div class="topbar">
+        <div class="time_wrapper">
+          <span></span>
+          <time>${escapeHtml(currentTime)}</time>
+        </div>
+      </div>
+
+      <header id="main_header" class="lcars-header">
+        <div class="header_inner">
+          <hgroup class="lcars-title-wrap">
+            <h1>${escapeHtml(basics.name || "")}</h1>
+            <h2>${escapeHtml(basics.label || "Software Engineer")} <span>|</span> LCARS <span>|</span> Resume</h2>
+          </hgroup>
+
+          <div class="menu-btn_wrapper">
+            <button id="viewport-btn" type="button">
+              <span class="material-symbols-outlined lcars-btn-icon" aria-hidden="true">view_in_ar</span>
+              <span>View Port</span>
+            </button>
+            <button id="menu-btn" type="button">
+              <span class="material-symbols-outlined lcars-btn-icon" aria-hidden="true">menu</span>
+              <span>Options</span>
+            </button>
+          </div>
+
+          <nav id="main_nav" class="open_nav" aria-label="LCARS Sections">
+            <ul>
+              <li><a href="#lcars-transmission"><span>Transmission</span></a></li>
+              <li><a href="#lcars-mission-brief"><span>Mission Brief</span></a></li>
+              <li><a href="#lcars-service-record"><span>Service Record</span></a></li>
+              <li><a href="#lcars-capabilities"><span>Capabilities</span></a></li>
+              <li><a href="#lcars-education"><span>Education</span></a></li>
+              <li><a href="#lcars-projects"><span>Projects</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main class="lcars-main-area">
+        <div class="lcars-frame">
+          <div class="content_wrapper">
+            <div class="content_container">
+              <article id="lcars-transmission" class="lcars-article">
+                <header><h2>Transmission</h2></header>
+                <div class="article_content contact-grid">
+                  ${contactItems.map((item) => `<span>${renderContactItem(item)}</span>`).join("")}
+                </div>
+                <footer><div class="footer_bar"></div></footer>
+              </article>
+
+              <article id="lcars-mission-brief" class="lcars-article">
+                <header><h2>Mission Brief</h2></header>
+                <div class="article_content">
+                  <p>${escapeHtml(basics.summary || "")}</p>
+                </div>
+                <footer><div class="footer_bar"></div></footer>
+              </article>
+
+              <div class="lcars-grid">
+                <article id="lcars-service-record" class="lcars-article lcars-main-record">
+                  <header><h2>Service Record</h2></header>
+                  <div class="article_content">
+                    ${work
+                      .map((job) => `
+                        <article class="lcars-job">
+                          <div class="job-top">
+                            <h3>${escapeHtml(job.position || "Role")}</h3>
+                            <div class="dates">${escapeHtml(formatDate(job.startDate))} - ${escapeHtml(job.endDate ? formatDate(job.endDate) : "Present")}</div>
+                          </div>
+                          <div class="company">${escapeHtml(job.name || "Company")}${job.location ? ` • ${escapeHtml(job.location)}` : ""}</div>
+                          ${job.summary ? `<p class="job-summary">${escapeHtml(job.summary)}</p>` : ""}
+                          ${normalizeList(job.highlights).length > 0
+                            ? `<ul class="highlights">${normalizeList(job.highlights).map((h) => `<li>${linkifyText(h)}</li>`).join("")}</ul>`
+                            : ""}
+                        </article>
+                      `)
+                      .join("")}
+                  </div>
+                  <footer><div class="footer_bar"></div></footer>
+                </article>
+
+                <div class="lcars-side-stack">
+                  <article id="lcars-capabilities" class="lcars-article">
+                    <header><h3>Capabilities</h3></header>
+                    <div class="article_content">
+                      ${skills
+                        .map((skill) => `
+                          <div class="skill-group">
+                            <h3>${escapeHtml(skill.name || "Skill")}</h3>
+                            <p>${escapeHtml(normalizeList(skill.keywords).join(" • "))}</p>
+                          </div>
+                        `)
+                        .join("")}
+                    </div>
+                    <footer><div class="footer_bar"></div></footer>
+                  </article>
+
+                  <article id="lcars-education" class="lcars-article">
+                    <header><h3>Education</h3></header>
+                    <div class="article_content">
+                      ${renderTwoColumnEducation(education)}
+                    </div>
+                    <footer><div class="footer_bar"></div></footer>
+                  </article>
+
+                  <article id="lcars-projects" class="lcars-article">
+                    <header><h3>Projects</h3></header>
+                    <div class="article_content">
+                      ${projects
+                        .slice(0, 4)
+                        .map((project) => {
+                          const projectName = escapeHtml(project.name || "Project");
+                          const titleHtml = project.url
+                            ? `<a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">${projectName}</a>`
+                            : projectName;
+                          const dateLine = formatDateRange(project.startDate, project.endDate);
+                          const highlights = normalizeList(project.highlights);
+                          const highlightsHtml = highlights.length
+                            ? `<ul class="highlights">${highlights.map((h) => `<li>${linkifyText(h)}</li>`).join("")}</ul>`
+                            : "";
+
+                          return `
+                            <article class="lcars-project">
+                              <h3>${titleHtml}</h3>
+                              ${dateLine ? `<p class="project-dates">${escapeHtml(dateLine)}</p>` : ""}
+                              ${project.description ? `<p>${linkifyText(project.description)}</p>` : ""}
+                              ${highlightsHtml}
+                            </article>
+                          `;
+                        })
+                        .join("")}
+                    </div>
+                    <footer><div class="footer_bar"></div></footer>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer id="main_footer">
+        <div class="main_footer_content">
+          <p>Inspired by this <a href="https://codepen.io/RobinMartin/pen/abbEpGy" CodePen></a></p>
+          <p>Engineering profile in LCARS visual format.</p>
+        </div>
+      </footer>
+    </div>
   `;
 }
 
@@ -820,9 +1179,18 @@ function renderCurrentTheme() {
     return;
   }
 
+  if (theme === "lcars") {
+    container.className = "resume lcars";
+    container.innerHTML = renderLcars(resumeDataCache);
+    return;
+  }
+
   renderDefaultTheme(resumeDataCache);
 }
 
 initTheme();
 initFullToggle();
+initLcarsClickSound();
+initLcarsSectionNav();
+initLcarsHeaderControls();
 loadResume();
