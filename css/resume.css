@@ -29,6 +29,12 @@
   --h2-letter: 0;
   --h2-weight: 700;
   --h2-margin: 2em 0 1em;
+  --lcars-menu-icon-filter: brightness(0) saturate(100%);
+}
+
+body[data-theme="terminal"],
+body[data-theme="lcars"] {
+  --lcars-menu-icon-filter: brightness(0) saturate(100%) invert(94%);
 }
 
 * {
@@ -191,6 +197,10 @@ body[data-theme="lcars"] .theme-dock.lcars-menu-open .theme-icon {
   height: 18px;
   object-fit: contain;
   flex: 0 0 18px;
+}
+
+.theme-option[data-theme-option="lcars"] .theme-option-icon-svg {
+  filter: var(--lcars-menu-icon-filter);
 }
 
 .theme-option:hover,
