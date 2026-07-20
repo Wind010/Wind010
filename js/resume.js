@@ -3,13 +3,13 @@ function byId(id) {
 }
 
 const THEMES = [
-  { id: "man", label: "Linux Man" },
-  { id: "terminal", label: "Unix Terminal" },
-  { id: "minimal", label: "Modern Minimal" },
-  { id: "two-column", label: "Two-Column" },
-  { id: "bold-header", label: "Bold Header" },
-  { id: "timeline", label: "Timeline" },
-  { id: "lcars", label: "LCARS" }
+  { id: "man", label: "Linux Man", iconType: "material", icon: "menu_book" },
+  { id: "terminal", label: "Unix Terminal", iconType: "material", icon: "terminal" },
+  { id: "lcars", label: "LCARS", iconType: "image", icon: "images/tng.svg" },
+  { id: "minimal", label: "Modern Minimal", iconType: "material", icon: "crop_5_4" },
+  { id: "two-column", label: "Two-Column", iconType: "material", icon: "view_week" },
+  { id: "bold-header", label: "Bold Header", iconType: "material", icon: "title" },
+  { id: "timeline", label: "Timeline", iconType: "material", icon: "timeline" }
 ];
 const DEFAULT_THEME = "man";
 const LCARS_CLICK_SOUND_URLS = [
@@ -80,7 +80,7 @@ const DEFAULT_MANPAGE_TEMPLATE = `
   </section>
 
   <footer class="man-foot">
-    <span id="footerLeft">jefftong.dev</span>
+    <span id="footerLeft">jeff-tong.dev</span>
     <span id="footerCenter"></span>
     <span id="footerRight">JEFF-TONG(1)</span>
   </footer>
@@ -256,6 +256,28 @@ function applySectionTitles(theme) {
   });
 }
 
+function renderThemeOption(theme) {
+  const iconHtml = theme.iconType === "image"
+    ? `<img class="theme-option-icon theme-option-icon-svg" src="${escapeHtml(theme.icon)}" alt="" aria-hidden="true">`
+    : `<span class="material-symbols-outlined theme-option-icon" aria-hidden="true">${escapeHtml(theme.icon)}</span>`;
+
+  return `
+    <button class="theme-option" data-theme-option="${escapeHtml(theme.id)}" type="button">
+      ${iconHtml}
+      <span>${escapeHtml(theme.label)}</span>
+    </button>
+  `;
+}
+
+function populateThemeMenu() {
+  const flyout = document.querySelector(".theme-flyout");
+  if (!(flyout instanceof HTMLElement)) {
+    return;
+  }
+
+  flyout.innerHTML = THEMES.map((theme) => renderThemeOption(theme)).join("");
+}
+
 function setTheme(theme) {
   const next = isSupportedTheme(theme) ? theme : DEFAULT_THEME;
   document.body.setAttribute("data-theme", next);
@@ -278,6 +300,8 @@ function setTheme(theme) {
 }
 
 function initTheme() {
+  populateThemeMenu();
+
   const requestedTheme = getThemeFromUrl();
   const initialTheme = isSupportedTheme(requestedTheme) ? requestedTheme : DEFAULT_THEME;
   setTheme(initialTheme);
@@ -473,6 +497,34 @@ function pickProfile(profiles, networkName) {
   return profiles.find((p) => String(p.network || "").toLowerCase() === networkName.toLowerCase());
 }
 
+function renderLinkedText(text, url) {
+  const safeText = escapeHtml(text || "");
+  if (!url) {
+    return safeText;
+  }
+  return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${safeText}</a>`;
+}
+
+function renderDateRangeLine(startDate, endDate) {
+  return escapeHtml(formatDateRange(startDate, endDate));
+}
+
+function renderCompanyWithLocation(name, location, fallback = "Company") {
+  const company = escapeHtml(name || fallback);
+  return `${company}${location ? ` • ${escapeHtml(location)}` : ""}`;
+}
+
+function renderHighlightsList(highlights, { linkify = true, ulClass = "" } = {}) {
+  const items = normalizeList(highlights);
+  if (!items.length) {
+    return "";
+  }
+
+  const classAttr = ulClass ? ` class="${escapeHtml(ulClass)}"` : "";
+  const formatter = linkify ? linkifyText : escapeHtml;
+  return `<ul${classAttr}>${items.map((h) => `<li>${formatter(h)}</li>`).join("")}</ul>`;
+}
+
 function buildContactItems(basics) {
   const profiles = normalizeList(basics.profiles);
   const github = pickProfile(profiles, "github");
@@ -554,6 +606,16 @@ function renderSkills(resume) {
     return;
   }
 
+  if (getCurrentTheme() === "terminal") {
+    byId("skillsGrid").innerHTML = skills
+      .map((skill) => {
+        const values = normalizeList(skill.keywords).filter(Boolean).join(", ") || "N/A";
+        return `<div class="skill-row"><span class="skill-name">${escapeHtml(skill.name || "Skill")}</span><span class="skill-values">${escapeHtml(values)}</span></div>`;
+      })
+      .join("");
+    return;
+  }
+
   byId("skillsGrid").innerHTML = skills
     .map((skill) => {
       const keywordTokens = normalizeList(skill.keywords)
@@ -570,20 +632,17 @@ function renderWork(resume) {
   const work = normalizeList(resume.work);
   byId("workHistory").innerHTML = work
     .map((job) => {
-      const highlights = normalizeList(job.highlights);
       const company = job.name || "COMPANY";
       const role = job.position || "Role";
       const companyText = escapeHtml(company);
       const roleText = escapeHtml(role);
-      const dateLine = formatDateRange(job.startDate, job.endDate);
-      const highlightsHtml = highlights.length
-        ? `<ul>${highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join("")}</ul>`
-        : "";
+      const dateLine = renderDateRangeLine(job.startDate, job.endDate);
+      const highlightsHtml = renderHighlightsList(job.highlights, { linkify: false });
       return `
         <article class="job fade-in">
           <div class="item-head">
             <div class="item-title"><span class="item-company-inline">${companyText}</span><span class="item-title-sep"> - </span><span class="item-role">${roleText}</span></div>
-            <div class="item-dates">${escapeHtml(dateLine)}</div>
+            <div class="item-dates">${dateLine}</div>
           </div>
           <div class="item-company">${companyText}</div>
           <p class="item-summary">${escapeHtml(job.summary || "")}</p>
@@ -598,14 +657,8 @@ function renderProjects(resume) {
   const projects = normalizeList(resume.projects);
   byId("projects").innerHTML = projects
     .map((project) => {
-      const highlights = normalizeList(project.highlights);
-      const projectName = escapeHtml(project.name || "Project");
-      const titleHtml = project.url
-        ? `<a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">${projectName}</a>`
-        : projectName;
-      const highlightsHtml = highlights.length
-        ? `<ul>${highlights.map((h) => `<li>${linkifyText(h)}</li>`).join("")}</ul>`
-        : "";
+      const titleHtml = renderLinkedText(project.name || "Project", project.url);
+      const highlightsHtml = renderHighlightsList(project.highlights);
 
       return `
         <article class="project fade-in">
@@ -626,12 +679,12 @@ function renderEducation(resume) {
   byId("education").innerHTML = education
     .map((edu) => {
       const title = `${edu.studyType || "Program"}${edu.area ? `, ${edu.area}` : ""}`;
-      const dateLine = formatDateRange(edu.startDate, edu.endDate);
+      const dateLine = renderDateRangeLine(edu.startDate, edu.endDate);
       return `
         <article class="edu fade-in">
           <div class="item-head">
             <div class="item-title">${escapeHtml(edu.institution || "Institution")}</div>
-            <div class="item-dates">${escapeHtml(dateLine)}</div>
+            <div class="item-dates">${dateLine}</div>
           </div>
           <p class="item-summary">${escapeHtml(title)}</p>
         </article>
@@ -746,17 +799,11 @@ function renderTwoColumn(data) {
             <div class="job">
               <div class="job-header">
                 <h3>${escapeHtml(job.position || "Role")}</h3>
-                <div class="dates">${escapeHtml(formatDate(job.startDate))} - ${escapeHtml(job.endDate ? formatDate(job.endDate) : "Present")}</div>
+                <div class="dates">${renderDateRangeLine(job.startDate, job.endDate)}</div>
               </div>
-              <div class="company">${escapeHtml(job.name || "Company")}${job.location ? ` • ${escapeHtml(job.location)}` : ""}</div>
+              <div class="company">${renderCompanyWithLocation(job.name, job.location)}</div>
               ${job.summary ? `<p class="job-summary">${escapeHtml(job.summary)}</p>` : ""}
-              ${normalizeList(job.highlights).length
-                ? `
-                  <ul class="highlights">
-                    ${normalizeList(job.highlights).map((h) => `<li>${linkifyText(h)}</li>`).join("")}
-                  </ul>
-                `
-                : ""}
+              ${renderHighlightsList(job.highlights, { ulClass: "highlights" })}
             </div>
           `)
           .join("")}
@@ -794,16 +841,12 @@ function renderBoldHeader(data) {
               <div class="job-header">
                 <div>
                   <h3>${escapeHtml(job.position || "Role")}</h3>
-                  <div class="company">${escapeHtml(job.name || "Company")}${job.location ? ` • ${escapeHtml(job.location)}` : ""}</div>
+                  <div class="company">${renderCompanyWithLocation(job.name, job.location)}</div>
                 </div>
-                <div class="dates">${escapeHtml(formatDate(job.startDate))} - ${escapeHtml(job.endDate ? formatDate(job.endDate) : "Present")}</div>
+                <div class="dates">${renderDateRangeLine(job.startDate, job.endDate)}</div>
               </div>
               ${job.summary ? `<p class="job-summary">${escapeHtml(job.summary)}</p>` : ""}
-              ${normalizeList(job.highlights).length > 0 ? `
-                <ul class="highlights">
-                  ${normalizeList(job.highlights).map((h) => `<li>${linkifyText(h)}</li>`).join("")}
-                </ul>
-              ` : ""}
+              ${renderHighlightsList(job.highlights, { ulClass: "highlights" })}
             </div>
           `).join("")}
         </section>
@@ -871,16 +914,12 @@ function renderTimeline(data) {
               <div class="job-header">
                 <div>
                   <h3>${escapeHtml(job.position || "Role")}</h3>
-                  <div class="company">${escapeHtml(job.name || "Company")}${job.location ? ` • ${escapeHtml(job.location)}` : ""}</div>
+                  <div class="company">${renderCompanyWithLocation(job.name, job.location)}</div>
                 </div>
-                <div class="dates">${escapeHtml(formatDate(job.startDate))} - ${escapeHtml(job.endDate ? formatDate(job.endDate) : "Present")}</div>
+                <div class="dates">${renderDateRangeLine(job.startDate, job.endDate)}</div>
               </div>
               ${job.summary ? `<p class="job-summary">${escapeHtml(job.summary)}</p>` : ""}
-              ${normalizeList(job.highlights).length > 0 ? `
-                <ul class="highlights">
-                  ${normalizeList(job.highlights).map((h) => `<li>${linkifyText(h)}</li>`).join("")}
-                </ul>
-              ` : ""}
+              ${renderHighlightsList(job.highlights, { ulClass: "highlights" })}
             </div>
           </div>
         `).join("")}
@@ -976,13 +1015,11 @@ function renderLcars(data) {
                         <article class="lcars-job">
                           <div class="job-top">
                             <h3>${escapeHtml(job.position || "Role")}</h3>
-                            <div class="dates">${escapeHtml(formatDate(job.startDate))} - ${escapeHtml(job.endDate ? formatDate(job.endDate) : "Present")}</div>
+                            <div class="dates">${renderDateRangeLine(job.startDate, job.endDate)}</div>
                           </div>
-                          <div class="company">${escapeHtml(job.name || "Company")}${job.location ? ` • ${escapeHtml(job.location)}` : ""}</div>
+                          <div class="company">${renderCompanyWithLocation(job.name, job.location)}</div>
                           ${job.summary ? `<p class="job-summary">${escapeHtml(job.summary)}</p>` : ""}
-                          ${normalizeList(job.highlights).length > 0
-                            ? `<ul class="highlights">${normalizeList(job.highlights).map((h) => `<li>${linkifyText(h)}</li>`).join("")}</ul>`
-                            : ""}
+                          ${renderHighlightsList(job.highlights, { ulClass: "highlights" })}
                         </article>
                       `)
                       .join("")}
@@ -1020,20 +1057,14 @@ function renderLcars(data) {
                       ${projects
                         .slice(0, 4)
                         .map((project) => {
-                          const projectName = escapeHtml(project.name || "Project");
-                          const titleHtml = project.url
-                            ? `<a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">${projectName}</a>`
-                            : projectName;
-                          const dateLine = formatDateRange(project.startDate, project.endDate);
-                          const highlights = normalizeList(project.highlights);
-                          const highlightsHtml = highlights.length
-                            ? `<ul class="highlights">${highlights.map((h) => `<li>${linkifyText(h)}</li>`).join("")}</ul>`
-                            : "";
+                          const titleHtml = renderLinkedText(project.name || "Project", project.url);
+                          const dateLine = renderDateRangeLine(project.startDate, project.endDate);
+                          const highlightsHtml = renderHighlightsList(project.highlights, { ulClass: "highlights" });
 
                           return `
                             <article class="lcars-project">
                               <h3>${titleHtml}</h3>
-                              ${dateLine ? `<p class="project-dates">${escapeHtml(dateLine)}</p>` : ""}
+                              ${dateLine ? `<p class="project-dates">${dateLine}</p>` : ""}
                               ${project.description ? `<p>${linkifyText(project.description)}</p>` : ""}
                               ${highlightsHtml}
                             </article>
@@ -1052,7 +1083,7 @@ function renderLcars(data) {
 
       <footer id="main_footer">
         <div class="main_footer_content">
-          <p>Inspired by this <a href="https://codepen.io/RobinMartin/pen/abbEpGy" CodePen></a></p>
+          <p>Inspired by this <a href="https://codepen.io/RobinMartin/pen/abbEpGy">CodePen</a></p>
           <p>Engineering profile in LCARS visual format.</p>
         </div>
       </footer>
@@ -1150,6 +1181,13 @@ function renderDefaultTheme(resume) {
   applySectionTitles(getCurrentTheme());
 }
 
+const THEME_RENDERERS = new Map([
+  ["two-column", { className: "resume two-column", render: renderTwoColumn }],
+  ["bold-header", { className: "resume bold-header", render: renderBoldHeader }],
+  ["timeline", { className: "resume timeline", render: renderTimeline }],
+  ["lcars", { className: "resume lcars", render: renderLcars }]
+]);
+
 function renderCurrentTheme() {
   if (!resumeDataCache) {
     return;
@@ -1161,27 +1199,10 @@ function renderCurrentTheme() {
   }
 
   const theme = getCurrentTheme();
-  if (theme === "two-column") {
-    container.className = "resume two-column";
-    container.innerHTML = renderTwoColumn(resumeDataCache);
-    return;
-  }
-
-  if (theme === "bold-header") {
-    container.className = "resume bold-header";
-    container.innerHTML = renderBoldHeader(resumeDataCache);
-    return;
-  }
-
-  if (theme === "timeline") {
-    container.className = "resume timeline";
-    container.innerHTML = renderTimeline(resumeDataCache);
-    return;
-  }
-
-  if (theme === "lcars") {
-    container.className = "resume lcars";
-    container.innerHTML = renderLcars(resumeDataCache);
+  const renderer = THEME_RENDERERS.get(theme);
+  if (renderer) {
+    container.className = renderer.className;
+    container.innerHTML = renderer.render(resumeDataCache);
     return;
   }
 
