@@ -313,6 +313,47 @@ function initTheme() {
   });
 }
 
+function initThemeTouchMenu() {
+  const dock = document.querySelector(".theme-dock");
+  if (!(dock instanceof HTMLElement)) {
+    return;
+  }
+
+  const supportsTouchLikeInput = window.matchMedia("(hover: none)").matches
+    || window.matchMedia("(pointer: coarse)").matches;
+  if (!supportsTouchLikeInput) {
+    return;
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    if (getCurrentTheme() === "lcars") {
+      dock.classList.remove("touch-menu-open");
+      return;
+    }
+
+    if (target.closest(".theme-option")) {
+      dock.classList.remove("touch-menu-open");
+      return;
+    }
+
+    if (target.closest(".theme-flyout")) {
+      return;
+    }
+
+    if (target.closest(".theme-dock")) {
+      dock.classList.toggle("touch-menu-open");
+      return;
+    }
+
+    dock.classList.remove("touch-menu-open");
+  });
+}
+
 function getLcarsClickAudio() {
   const randomIndex = Math.floor(Math.random() * LCARS_CLICK_SOUND_URLS.length);
   const url = LCARS_CLICK_SOUND_URLS[randomIndex];
@@ -1210,6 +1251,7 @@ function renderCurrentTheme() {
 }
 
 initTheme();
+initThemeTouchMenu();
 initFullToggle();
 initLcarsClickSound();
 initLcarsSectionNav();

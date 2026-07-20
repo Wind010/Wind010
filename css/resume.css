@@ -141,9 +141,8 @@ body {
   transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
 }
 
-.theme-dock:hover .theme-flyout,
 .theme-dock:focus-within .theme-flyout,
-.theme-flyout:hover {
+.theme-dock.touch-menu-open .theme-flyout {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -157,8 +156,12 @@ body[data-theme="lcars"] .theme-dock.lcars-menu-open .theme-flyout {
   pointer-events: auto;
 }
 
-.theme-dock:hover .theme-icon,
 .theme-dock:focus-within .theme-icon {
+  opacity: 1;
+  color: var(--text);
+}
+
+.theme-dock.touch-menu-open .theme-icon {
   opacity: 1;
   color: var(--text);
 }
@@ -506,12 +509,27 @@ li::before {
   }
 }
 
-@media (hover: none) {
-  .theme-flyout {
+@media (hover: hover) {
+  .theme-dock:hover .theme-flyout,
+  .theme-flyout:hover {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
+  }
+
+  .theme-dock:hover .theme-icon {
+    opacity: 1;
+    color: var(--text);
+  }
+}
+
+@media (hover: none) {
+  .theme-flyout {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
   }
 }
 
