@@ -90,6 +90,33 @@ body {
   box-shadow: none;
 }
 
+.full-toggle {
+  position: fixed;
+  top: 10px;
+  right: 50px;
+  z-index: 41;
+  height: 32px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--line) 35%, transparent);
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.full-toggle:hover,
+.full-toggle:focus-visible,
+.full-toggle.active {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--line) 55%, transparent);
+  outline: none;
+}
+
 .theme-flyout {
   position: absolute;
   top: 46px;
@@ -265,6 +292,26 @@ a:hover {
   margin-left: 7ch;
 }
 
+.skills-list {
+  margin: 0 0 0 7ch;
+}
+
+.skill-item {
+  margin-bottom: 0.8em;
+}
+
+.skill-item dt {
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.01em;
+  margin-bottom: 0.2em;
+}
+
+.skill-item dd {
+  margin-left: 7ch;
+  margin-bottom: 0;
+}
+
 .skill-row {
   margin-bottom: 0.8em;
 }
@@ -383,6 +430,7 @@ li::before {
   #interestsLine,
   .info-row,
   .skills-grid,
+  .skills-list,
   .item-title {
     margin-left: 0;
   }
@@ -390,7 +438,8 @@ li::before {
   .item-dates,
   .item-summary,
   ul,
-  .skill-row span:last-child {
+  .skill-row span:last-child,
+  .skill-item dd {
     margin-left: 0;
   }
 
@@ -409,6 +458,13 @@ li::before {
   .theme-flyout {
     right: 8px;
     top: 44px;
+  }
+
+  .full-toggle {
+    right: 46px;
+    height: 30px;
+    font-size: 10px;
+    padding: 0 8px;
   }
 }
 

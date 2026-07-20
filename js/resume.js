@@ -121,6 +121,34 @@ function getThemeFromUrl() {
   return params.get("theme");
 }
 
+function useFullResumeFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const full = params.get("full");
+  return full === "true";
+}
+
+function getFilteredWorkHistory(work) {
+  const roles = normalizeList(work);
+  const requiredRoles = [
+    (job) => job && job.name === "CVS Health",
+    (job) => job && job.name === "UglyEgg.AI",
+    (job) => job && job.name === "Starbucks Coffee Company",
+    (job) => job && job.name === "BECU",
+    (job) => job && job.name === "Agilysys" && job.position === "Principal Software Development Engineer",
+    (job) => job && job.name === "Microsoft" && job.position === "Build and Tools Engineer"
+  ];
+
+  const selected = [];
+  requiredRoles.forEach((matcher) => {
+    const found = roles.find(matcher);
+    if (found) {
+      selected.push(found);
+    }
+  });
+
+  return selected.length ? selected : roles;
+}
+
 function syncThemeToUrl(theme) {
   const url = new URL(window.location.href);
   if (theme === DEFAULT_THEME) {
@@ -129,6 +157,44 @@ function syncThemeToUrl(theme) {
     url.searchParams.set("theme", theme);
   }
   window.history.replaceState({}, "", url);
+}
+
+function syncFullToUrl(enabled) {
+  const url = new URL(window.location.href);
+  if (enabled) {
+    url.searchParams.set("full", "true");
+  } else {
+    url.searchParams.delete("full");
+  }
+  window.history.replaceState({}, "", url);
+}
+
+function updateFullToggleButton() {
+  const toggle = byId("fullToggle");
+  if (!toggle) {
+    return;
+  }
+
+  const enabled = useFullResumeFromUrl();
+  toggle.textContent = enabled ? "Full: On" : "Full: Off";
+  toggle.title = enabled ? "Full resume" : "Brief resume";
+  toggle.setAttribute("aria-label", enabled ? "Full resume" : "Brief resume");
+  toggle.classList.toggle("active", enabled);
+}
+
+function initFullToggle() {
+  const toggle = byId("fullToggle");
+  if (!toggle) {
+    return;
+  }
+
+  updateFullToggleButton();
+  toggle.addEventListener("click", () => {
+    const next = !useFullResumeFromUrl();
+    syncFullToUrl(next);
+    updateFullToggleButton();
+    loadResume();
+  });
 }
 
 function applySectionTitles(theme) {
@@ -286,6 +352,22 @@ function renderContact(resume) {
 
 function renderSkills(resume) {
   const skills = normalizeList(resume.skills);
+  if (getCurrentTheme() === "man") {
+    byId("skillsGrid").innerHTML = `
+      <div class="skills-list">
+        ${skills
+          .map((skill) => `
+            <div class="skill-item">
+              <dt>${escapeHtml(skill.name || "Skill")}</dt>
+              <dd>${escapeHtml(normalizeList(skill.keywords).filter(Boolean).join(", ") || "N/A")}</dd>
+            </div>
+          `)
+          .join("")}
+      </div>
+    `;
+    return;
+  }
+
   byId("skillsGrid").innerHTML = skills
     .map((skill) => {
       const keywordTokens = normalizeList(skill.keywords)
@@ -653,8 +735,9 @@ function renderMeta(resume) {
     contactSection.setAttribute("data-role", basics.label || "Engineer");
   }
 
-  byId("nameLine").textContent = `${profile.toLowerCase().replaceAll(/\s+/g, "-")} - ${basics.label || "Engineer"}`;
-  byId("synopsisLine").textContent = `${profile} [--role=${basics.label || "engineer"}] [--location=${city}] [--focus=full-stack]`;
+  const profileSlug = profile.toLowerCase().replaceAll(/\s+/g, "-");
+  byId("nameLine").innerHTML = `<strong>${escapeHtml(profileSlug)}</strong> - ${escapeHtml(basics.label || "Engineer")}`;
+  byId("synopsisLine").textContent = `jtong [--role=${basics.label || "engineer"}] [--location=${city}] [--focus=full-stack]`;
   byId("descriptionLine").textContent = basics.summary || "";
 
   const languages = normalizeList(resume.languages)
@@ -669,13 +752,24 @@ function renderMeta(resume) {
 }
 
 async function loadResume() {
+  const useFull = useFullResumeFromUrl();
+  const primarySource = "resume_full.json";
+  const fallbackSource = "resume.json";
+
   try {
-    const response = await fetch("resume.json", { cache: "no-store" });
+    let response = await fetch(primarySource, { cache: "no-store" });
     if (!response.ok) {
-      throw new Error(`Unable to load resume.json (${response.status})`);
+      response = await fetch(fallbackSource, { cache: "no-store" });
+    }
+
+    if (!response.ok) {
+      throw new Error(`Unable to load ${primarySource} (${response.status})`);
     }
 
     resumeDataCache = await response.json();
+    if (!useFull && resumeDataCache && Array.isArray(resumeDataCache.work)) {
+      resumeDataCache.work = getFilteredWorkHistory(resumeDataCache.work);
+    }
     renderCurrentTheme();
   } catch (error) {
     const container = document.querySelector("main");
@@ -730,4 +824,5 @@ function renderCurrentTheme() {
 }
 
 initTheme();
+initFullToggle();
 loadResume();

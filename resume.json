@@ -94,6 +94,20 @@
       ]
     },
     {
+      "name": "Starbucks Coffee Company - Summit Group Solutions Inc.",
+      "position": "Senior Software Development Engineer",
+      "url": "https://summitsolutionsgroup.com/",
+      "startDate": "2018-02-01",
+      "endDate": "2018-09-01",
+      "summary": "Delivered payment platform enhancements for Stars for Everyone initiatives prior to direct FTE transition.",
+      "highlights": [
+        "Implemented Google Pay integration for payment APIs used by the mobile application.",
+        "Delivered bug fixes and feature additions to Payment Method REST APIs aligned to roadmap goals.",
+        "Standardized JWT-based API security and promoted code reviews, static analysis, and documentation.",
+        "Designed and executed load testing to ensure APIs exceeded production traffic targets."
+      ]
+    },
+    {
       "name": "Agilysys",
       "position": "Principal Software Development Engineer",
       "url": "https://www.agilysys.com",
@@ -120,6 +134,20 @@
     },
     {
       "name": "Agilysys",
+      "position": "Software Development Engineer",
+      "url": "https://www.agilysys.com",
+      "startDate": "2013-01-01",
+      "endDate": "2014-12-31",
+      "summary": "Delivered customer-critical engineering solutions and improved installation, security, and platform stability.",
+      "highlights": [
+        "Resolved VP/CEO-level critical issues that unblocked a project valued at about $2.2M.",
+        "Designed a reusable WiX installer framework used across multiple products.",
+        "Refactored ASP.NET booking engines, WCF services, and internal tooling to improve reliability.",
+        "Developed RESTful authentication services and implemented PCI-related security fixes."
+      ]
+    },
+    {
+      "name": "Agilysys",
       "position": "Senior Software Development Engineer",
       "url": "https://www.agilysys.com",
       "startDate": "2012-10-01",
@@ -128,6 +156,20 @@
       "highlights": [
         "Provided deep investigations and resolutions for VP/CEO-level customer escalations.",
         "Unblocked projects valued at approximately $2.2M."
+      ]
+    },
+    {
+      "name": "Agilysys - Technology Innovations Group LLC",
+      "position": "Software Development/Build Engineer",
+      "url": "https://www.agilysys.com",
+      "startDate": "2012-01-01",
+      "endDate": "2013-12-31",
+      "summary": "Supported build and product engineering workflows while modernizing tooling and integration surfaces.",
+      "highlights": [
+        "Developed code fixes and tooling improvements for build systems and product code quality.",
+        "Migrated Team Foundation Server databases and upgraded TFS from 2010 to 2012.",
+        "Built custom MSBuild targets for versioning, code signing, coverage, and WiX installer automation.",
+        "Refactored partner interfaces and supported mixed VB6 and VB.NET build interoperability."
       ]
     },
     {
@@ -142,6 +184,76 @@
         "Reduced productivity and test-time loss by resolving and preventing build breaks.",
         "Developed a source-control check-in quality tool adopted by Office 365, Xbox Kinect, and Exchange teams.",
         "Contributed work recognized in Engineering Excellence award consideration."
+      ]
+    },
+    {
+      "name": "InterConnection",
+      "position": "Lead Software Engineer",
+      "url": "https://interconnection.org",
+      "startDate": "2009-01-01",
+      "endDate": "",
+      "summary": "Built and evolved inventory and reporting tooling for refurbishing operations and donation tracking.",
+      "highlights": [
+        "Developed the next version of Refurbisher Inventory Tool with WMI-based hardware discovery and SQL tracking.",
+        "Partnered with founders and management to improve operational processes through software.",
+        "Added reporting for DOD-compliant quality wiping tracking of drives and phones.",
+        "Implemented donation tracking workflows for major enterprise and nonprofit contributors."
+      ]
+    },
+    {
+      "name": "Microsoft - TEKSystems",
+      "position": "Refurbisher Preinstallation Kit / Refurbisher Inventory Tool / Easy Windows Deployment Engineer",
+      "url": "https://www.microsoft.com",
+      "startDate": "2008-01-01",
+      "endDate": "2009-12-31",
+      "summary": "Developed and tested deployment and refurbisher tooling for large-scale client deployment programs.",
+      "highlights": [
+        "Built migration and diff tools in C++, PowerShell, and T-SQL for configuration and schema transitions.",
+        "Developed Refurbisher Inventory Tool across C#, ASP.NET, SQL Server, and IIS stacks.",
+        "Owned EWD feature delivery from release candidate to RTM, including installer and performance work.",
+        "Migrated local builds into CoreXt while satisfying prefix, OACR, Prefast, and FxCop quality gates."
+      ]
+    },
+    {
+      "name": "Microsoft - TEKSystems",
+      "position": "FlexGo Deployment / Technical Support / Sustained Engineering",
+      "url": "https://www.microsoft.com",
+      "startDate": "2007-01-01",
+      "endDate": "2008-12-31",
+      "summary": "Supported FlexGo deployment quality, hotfix engineering, and partner delivery operations.",
+      "highlights": [
+        "Executed black-box and grey-box testing strategies for client/server QFE and hotfix validation.",
+        "Developed deployment scripts and applications for fix distribution and manufacturing workflows.",
+        "Led root cause analysis and break-fix support for partner critical incidents.",
+        "Built C# server utility to normalize local time to UTC as part of manufacturing workflows."
+      ]
+    },
+    {
+      "name": "Microsoft - Siemens Business Services, Inc.",
+      "position": "FlexGo Deployment / Technical Support / Sustained Engineering",
+      "url": "https://www.microsoft.com",
+      "startDate": "2006-01-01",
+      "endDate": "2006-12-31",
+      "summary": "Supported global partner onboarding, manufacturing, and technical escalation efforts for FlexGo 1.0.",
+      "highlights": [
+        "Contributed to onboarding and deployment operations for partners across Brazil, China, Russia, and Mexico.",
+        "Owned FlexGo 1.0 client self-hosting project management responsibilities.",
+        "Created support procedures and documentation for Tier 1/2/3 operations.",
+        "Handled critical issue troubleshooting through workaround and final resolution."
+      ]
+    },
+    {
+      "name": "Microsoft - Siemens Business Services, Inc.",
+      "position": "MSTV/IPTV Escalations Engineer (Tier III)",
+      "url": "https://www.microsoft.com",
+      "startDate": "2005-01-01",
+      "endDate": "2006-12-31",
+      "summary": "Provided Tier III IPTV escalation support and operational engineering across server and network systems.",
+      "highlights": [
+        "Built lightweight automated UI testing tools in C#.",
+        "Supported IPTV 1.0 environments across IIS 6.0, SQL Server 2000, and Windows Server 2003.",
+        "Authored installation and configuration guidance for IPTV Personal Server.",
+        "Performed bug validation and contributed to client and server build quality checks."
       ]
     }
   ],
@@ -185,51 +297,129 @@
     {
       "name": "Scripting",
       "level": "Advanced",
-      "keywords": ["POSIX Shell", "PowerShell", "Batch"]
+      "keywords": [
+        "POSIX Shell",
+        "PowerShell",
+        "Batch"
+      ]
     },
     {
       "name": "Programming Languages",
       "level": "Advanced",
-      "keywords": ["C#", "Python", "PHP", "TypeScript", "JavaScript", "Java", "Go", "Rust", "C", "C++"]
+      "keywords": [
+        "C#",
+        "Python",
+        "PHP",
+        "TypeScript",
+        "JavaScript",
+        "Java",
+        "Go",
+        "Rust",
+        "C",
+        "C++"
+      ]
     },
     {
       "name": "Frontend",
       "level": "Intermediate",
-      "keywords": ["HTML", "JQuery", "React", "TypeScript", "HTML5", "CSS3", "Tailwind"]
+      "keywords": [
+        "HTML",
+        "JQuery",
+        "React",
+        "TypeScript",
+        "HTML5",
+        "CSS3",
+        "Tailwind"
+      ]
     },
     {
       "name": "Backend",
       "level": "Advanced",
-      "keywords": ["ASP.NET", "Flask", "FastAPI", "Django", "Node.js", "PHP"]
+      "keywords": [
+        "ASP.NET",
+        "Flask",
+        "FastAPI",
+        "Django",
+        "Node.js",
+        "PHP"
+      ]
     },
     {
       "name": "Data",
       "level": "Advanced",
-      "keywords": ["PostgresSQL", "MySQL", "SQL Server", "MongoDB", "Supabase", "Kafka", "Spark", "Databricks", "Redis"]
+      "keywords": [
+        "PostgresSQL",
+        "MySQL",
+        "SQL Server",
+        "MongoDB",
+        "Supabase",
+        "Kafka",
+        "Spark",
+        "Databricks",
+        "Redis"
+      ]
     },
     {
       "name": "Cloud & DevOps",
       "level": "Advanced",
-      "keywords": ["Azure", "AWS", "Docker", "Kubernetes", "Github Actions", "Azure Devops", "Jenkins"]
+      "keywords": [
+        "Azure",
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "Github Actions",
+        "Azure Devops",
+        "Jenkins"
+      ]
     },
     {
       "name": "Agentic Harnesses",
       "level": "Intermediate",
-      "keywords": [ "Pi", "Hermes", "Codex", "Claude Code", "OpenCode", "GitHub Copilot" ]
+      "keywords": [
+        "Pi",
+        "Hermes",
+        "Codex",
+        "Claude Code",
+        "OpenCode",
+        "GitHub Copilot"
+      ]
     },
     {
       "name": "Open Weight Models",
       "level": "Intermediate",
-      "keywords": ["Qwen", "Gemini", "Kimi", "DeepSeek", "MiniMax", "GLM", "Mini-CPM5"]
+      "keywords": [
+        "Qwen",
+        "Gemini",
+        "Kimi",
+        "DeepSeek",
+        "MiniMax",
+        "GLM",
+        "Mini-CPM5"
+      ]
     },
     {
       "name": "AI Tooling",
       "level": "Intermediate",
-      "keywords": ["Voice Cloning", "Voice Generation", "Image Generation", "Skills Creation"]
+      "keywords": [
+        "Voice Cloning",
+        "Voice Generation",
+        "Image Generation",
+        "Skills Creation"
+      ]
     }
   ],
-  "languages": ["English", "Some Cantonese"],
-  "interests": ["Coding", "Hacking", "CyberSecurity", "AI", "Science", "Martial Arts"],
+  "languages": [
+    "English",
+    "Some Cantonese"
+  ],
+  "interests": [
+    "Coding",
+    "Hacking",
+    "CyberSecurity",
+    "AI",
+    "Science",
+    "Martial Arts"
+  ],
   "references": [
     "https://www.linkedin.com/in/jeff-jin-hung-tong/details/recommendations"
   ],
