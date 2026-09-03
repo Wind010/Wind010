@@ -46,7 +46,21 @@
       "endDate": "",
       "summary": "Design, architect, and implement modernization-refactoring of backend services and legacy frontends.",
       "highlights": [
-        "Refactored legacy MinuteClinic services to FastAPI to improve care provider scheduling experience."
+        "Rewrite of legacy MinuteClinic services to FastAPI to improve care provider scheduling experience.",
+        "Rewrite of MinuteClinic payment system.",
+        "Resolving customer payment flow resulting in hundreds of thousands of dollars of authorization hold."
+      ]
+    },
+    {
+      "name": "SquidSec",
+      "position": "Senior Software Engineer",
+      "url": "https://squidhacker.com/squidsec-team/",
+      "startDate": "2026-04-26",
+      "endDate": "",
+      "summary": "Full stack development",
+      "highlights": [
+        "Security research and tool development",
+        "SquidScanner improvements"
       ]
     },
     {
