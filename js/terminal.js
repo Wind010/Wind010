@@ -8,7 +8,7 @@ let longDelayProbability = 0.025;  // Play around with this to see what looks go
 
 const cursor = document.querySelector('.cursor');
 const CURSOR_PADDING = 20;
-const originalCursorPosition = prompt.scrollWidth + CURSOR_PADDING;
+let originalCursorPosition = prompt.scrollWidth + CURSOR_PADDING;
 const CURSOR_CHAR = '▓' // _ ▄ █ ▓ ▒ ▌ 😏
 const commands = [
   HELP,
@@ -39,7 +39,10 @@ const commands = [
   DECODE,
   DECODE_TEXT,
   DELAY_MS,
-  THEME
+  THEME,
+  'tmux',
+  'ssh',
+  'matrix'
 ];
 
 const parsedContent = {};
@@ -93,6 +96,7 @@ input.addEventListener('keydown', (e) => {
       break;
       case 'Tab':
         e.preventDefault(); // Prevent default Tab behavior
+        document.querySelectorAll('.completion-list').forEach(el => el.remove());
         const inputText = input.value.trim();
         const matchingCommands = commands.filter(cmd => cmd.startsWith(inputText));
         if (matchingCommands.length === 1) {
@@ -102,6 +106,7 @@ input.addEventListener('keydown', (e) => {
         } else if (matchingCommands.length > 1) {
           // Display a list of possible completions
           const completionList = document.createElement('ul');
+          completionList.classList.add('completion-list');
           matchingCommands.forEach(keyword => {
             const listItem = document.createElement('li');
             listItem.textContent = keyword;
@@ -115,6 +120,7 @@ input.addEventListener('keydown', (e) => {
         }
         break;
     case 'Enter':
+      document.querySelectorAll('.completion-list').forEach(el => el.remove());
       const command = input.value;
       displayCommand(command);
       processCommand(command);
@@ -158,6 +164,7 @@ function displayResponse(outputText) {
   simulateTyping(outputText, response);
 
   terminal.appendChild(response);
+  terminal.scrollTop = terminal.scrollHeight;
 }
 
 function displayResponseHtml(htmlContent) {
@@ -168,25 +175,22 @@ function displayResponseHtml(htmlContent) {
   simulateTyping(htmlContent, responseDiv, true);
 
   terminal.appendChild(responseDiv);
+  terminal.scrollTop = terminal.scrollHeight;
 }
 
-// Make sure the curosr intervals are cleared.
+// Strip any stray flicker-cursor char left behind by an interrupted typing effect.
 function stopCursorBlink(isHtml)
 {
-  var divs = document.getElementsByClassName('response');
-  var divs = document.querySelectorAll('div.response');
+  const divs = document.querySelectorAll('div.response');
   for (var j = 0; j < divs.length; j++) {
-    let divContent = divs[j][isHtml ? 'innerHTML' : 'textContent'];
-    divContent = divContent.replace(CURSOR_CHAR, '');
+    const content = divs[j][isHtml ? 'innerHTML' : 'textContent'];
+    divs[j][isHtml ? 'innerHTML' : 'textContent'] = content.replace(CURSOR_CHAR, '');
   }
-  // Clearing by id is not enough.
-  for(var x = 0; x < 5000; clearInterval(x++));
 }
 
 // Simulate typing effect with skewed jitter
 function simulateTyping(text, element, isHtml = false, showCursor = true, delayOption = 1) {
   let i = 0;
-  let isBlinking = true;
 
   stopCursorBlink(isHtml);
 
@@ -203,6 +207,7 @@ function simulateTyping(text, element, isHtml = false, showCursor = true, delayO
       } else {
         element.textContent = text.substring(0, i) + cursor;
       }
+      terminal.scrollTop = terminal.scrollHeight;
 
       i++;
 
@@ -218,29 +223,14 @@ function simulateTyping(text, element, isHtml = false, showCursor = true, delayO
 
       setTimeout(typeChar, typingSpeed);
     } else {
-      // Remove cursor once typing is finished
+      // Remove cursor once typing is finished; the input-line cursor takes over.
       if (isHtml) {
         element.innerHTML = text;
       } else {
         element.textContent = text;
       }
-
-      blinkCursor();
+      terminal.scrollTop = terminal.scrollHeight;
     }
-  }
-
-  function blinkCursor() {
-    if (!showCursor) {
-      return;
-    }
-    timeoutId = setInterval(() => {
-      text = isBlinking ? text.replace(CURSOR_CHAR, '') : text + CURSOR_CHAR;
-      element[isHtml ? 'innerHTML' : 'textContent'] = text;
-      isBlinking = !isBlinking;
-      // console.log(text, isBlinking); // Debug
-    }, cursorBlinkSpeed);
-
-    //console.log(timeoutId); // Debug
   }
 
   typeChar();
@@ -301,9 +291,7 @@ async  function processCommand(command) {
     case MARTIAL_ARTS:
       markdownContent = getContentUnderHeader(markdown, "Jeff Tong/Interests/Martial Arts")
       htmlContent = mdConverter.makeHtml(markdownContent);
-      displayResponseHtml(htmlContent, stopCursorBlink);
-      console.log((typingDelay  + typingJitter) * (htmlContent.length));
-      setTimeout(stopCursorBlink, (typingDelay  + typingJitter) * (htmlContent.length) / 4.2, true);
+      displayResponseHtml(htmlContent);
       break;
     case SHOWS:
       markdownContent = getContentUnderHeader(markdown, "Jeff Tong/Interests/Shows")
@@ -338,14 +326,12 @@ async  function processCommand(command) {
       markdownContent += "</h3>";
       htmlContent = mdConverter.makeHtml(markdownContent);
       displayResponseHtml(htmlContent);
-      setTimeout(stopCursorBlink, (typingDelay  + typingJitter) * (htmlContent.length) / 4.2, true);
       break;
     case CODE:
     case CODING:
       markdownContent = getContentUnderHeader(markdown, "Jeff Tong/Interests/Coding")
       htmlContent = mdConverter.makeHtml(markdownContent);
       displayResponseHtml(htmlContent);
-      setTimeout(stopCursorBlink, (typingDelay  + typingJitter) * (htmlContent.length) / 5, true);
       break;
     case ML:
     case MACHINE_LEARNING:
@@ -451,8 +437,12 @@ lrwxr-xr-x 1 user user   10 Jan 12 14:30 link1 -> passwords.txt
       startMatrixEffect();  // Trigger Matrix effect
       break;
     case 'theme':
-      setTheme(args[0].toLowerCase());
-      displayResponse(`Theme changed to ${args[0]}.`);
+      if (args.length === 0) {
+        displayResponse('Usage: theme [Retro|Matrix|StarTrek]');
+        break;
+      }
+      const themeError = setTheme(args[0].toLowerCase());
+      displayResponse(themeError || `Theme changed to ${args[0]}.`);
       break;
     default:
       displayResponse(`Command not found: ${command}`);
@@ -566,12 +556,18 @@ function getContentUnderHeader(markdown, headerPath) {
 }
 
 async function fetchMarkdown() {
-  const response = await fetch('terminal.md'); // Path to the Markdown file
-  if (!response.ok) {
-    console.error('Error fetching markdown:', response);
-    return;
+  input.disabled = true;
+  try {
+    const response = await fetch('terminal.md'); // Path to the Markdown file
+    if (!response.ok) {
+      console.error('Error fetching markdown:', response);
+      return;
+    }
+    markdown = await response.text();
+  } finally {
+    input.disabled = false;
+    input.focus();
   }
-  markdown = await response.text();
 }
 
 fetchMarkdown();
