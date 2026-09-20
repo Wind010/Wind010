@@ -1,237 +1,132 @@
-<link rel="stylesheet" href="readme.css">
+<div align="center">
+
+<img width="100%" src="./images/matrix_header.svg" alt="Jeff Tong" />
+
+<a href="https://www.fiverr.com/narapop" title="Art by @narapop">
+  <img src="./images/hacker_room.gif" alt="hacker_room" width="680"/>
+</a>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=26&duration=2500&pause=800&color=00F700&center=true&vCenter=true&multiline=false&repeat=true&random=false&width=800&height=100&lines=%F0%9F%9B%A1%EF%B8%8F+Security+Researcher+%7C+CTF+Player;%F0%9F%92%BB+Senior+Software+Development+Engineer;%F0%9F%A4%96+Machine+Learning+Enthusiast;%F0%9F%A5%8B+Martial+Artist;%F0%9F%90%9B+Bug+Bounty+Hunter" alt="typing" />
+
+<p align="center">
+  <a href="https://github.com/Wind010">
+    <img src="https://img.shields.io/badge/GitHub-Wind010-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
+  </a>
+  <a href="https://www.linkedin.com/in/jeff-jin-hung-tong/">
+    <img src="https://img.shields.io/badge/LinkedIn-Jeff%20Tong-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>
+  <a href="https://wind010.hashnode.dev">
+    <img src="https://img.shields.io/badge/Blog-Code%20Chronicles-2962FF?style=for-the-badge&logo=hashnode&logoColor=white" alt="Blog"/>
+  </a>
+  <a href="https://wind010.github.io/Wind010/">
+    <img src="https://img.shields.io/badge/Resume-jeff--tong.dev-FF5722?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/>
+  </a>
+</p>
+
+</div>
 
 # Jeff Tong
 
-I am a software developer with interests in `cybersecurity` and `machine learning`.  This markdown is the content used for [About Me](https://wind010.github.io/Wind010/).
+I am a software developer with interests in `cybersecurity` and `machine learning`.  This markdown is the content used for [About Me](https://jeff-tong.dev/about_me.html).
 
 <img src="./images/euc_01.jpg" alt="euc_01" style="width:300px;"/>
 
+<img src="./images/glow_divider.svg" width="100%" alt="divider"/>
 
-## Family
-Private
+## Currently
+* **Senior Software Development Engineer** @ [CVS Health](https://www.cvshealth.com) — Re-architecting front-end and backend services.
+* **Senior Software Engineer** @ [SquidSec](https://squidhacker.com/squidsec-team/) — security research and tool development.
+* **Principal Software Development Engineer / CTO** @ [UglyEgg.AI](https://www.uglyegg.ai) — full stack development of Generative Search Optimization.
 
+<img src="./images/glow_divider.svg" width="100%" alt="divider"/>
 
-## Education
-Bachelor of Science in Physics with Mathematics minor from [Western Washington University](https://www.wwu.edu/).
+## Tech Skills
 
-Intended to double major in CS, but ultimately dropped it.
+**Scripting**
+<br>
+![POSIX Shell](https://img.shields.io/badge/POSIX%20Shell-4EAA25?style=flat-square&logo=gnubash&logoColor=white) ![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white) ![Batch](https://img.shields.io/badge/Batch-C1F12E?style=flat-square)
 
-* MCPS: Microsoft Certified Professional
-* MCSA1: Windows 2000
-* MCSA1: Secrity on Windows 2000
-* MCSE1: Windows 2000
-* MCSE1: Security on Windows 2000
+**Programming Languages**
+<br>
+![C#](https://img.shields.io/badge/C%23-239120?style=flat-square&logo=csharp&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white) ![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white) ![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white) ![C](https://img.shields.io/badge/C-A8B9CC?style=flat-square&logo=c&logoColor=white) ![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat-square&logo=cplusplus&logoColor=white)
 
+**Frontend**
+<br>
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=flat-square&logo=jquery&logoColor=white) ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 
-## Employment
-TODO
+**Backend**
+<br>
+![ASP.NET](https://img.shields.io/badge/ASP.NET-512BD4?style=flat-square&logo=dotnet&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white) ![Django](https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 
+**Data**
+<br>
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) ![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=flat-square&logo=microsoftsqlserver&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white) ![Kafka](https://img.shields.io/badge/Kafka-231F20?style=flat-square&logo=apachekafka&logoColor=white) ![Spark](https://img.shields.io/badge/Spark-E25A1C?style=flat-square&logo=apachespark&logoColor=white) ![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
 
-## Interests
-In my spare time, I train in martial arts, hacking/cybersecurity/reverse engineering, machine learning, coding, blogging, Cosplay/Conventions and hanging with friends and play video games.
+**Cloud & DevOps**
+<br>
+![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white) ![Azure DevOps](https://img.shields.io/badge/Azure%20DevOps-0078D7?style=flat-square&logo=azuredevops&logoColor=white) ![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=jenkins&logoColor=white)
 
-* Electronics, mechanical keyboards, computer hardware, game development, graphics/shaders, comedy/humor.
+**Agentic Harnesses**
+<br>
+![Claude Code](https://img.shields.io/badge/Claude%20Code-D97757?style=flat-square&logo=claude&logoColor=white) ![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-000000?style=flat-square&logo=githubcopilot&logoColor=white) ![Codex](https://img.shields.io/badge/Codex-412991?style=flat-square&logo=openai&logoColor=white) ![Pi](https://img.shields.io/badge/Pi-6E56CF?style=flat-square) ![Hermes](https://img.shields.io/badge/Hermes-6E56CF?style=flat-square) ![OpenCode](https://img.shields.io/badge/OpenCode-6E56CF?style=flat-square)
 
+**Open Weight Models**
+<br>
+![Qwen](https://img.shields.io/badge/Qwen-615CED?style=flat-square) ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=flat-square&logo=googlegemini&logoColor=white) ![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?style=flat-square) ![Kimi](https://img.shields.io/badge/Kimi-000000?style=flat-square) ![MiniMax](https://img.shields.io/badge/MiniMax-E60027?style=flat-square) ![GLM](https://img.shields.io/badge/GLM-3859E8?style=flat-square) ![Mini--CPM5](https://img.shields.io/badge/Mini--CPM5-FF6F00?style=flat-square)
 
-### Blogging
-I document things so I don't forget.  Might be helpful for others.
-* [Code Chronicles](https://wind010.hashnode.dev)
+**AI Tooling**
+<br>
+![Voice Cloning](https://img.shields.io/badge/Voice%20Cloning-9C27B0?style=flat-square) ![Voice Generation](https://img.shields.io/badge/Voice%20Generation-9C27B0?style=flat-square) ![Image Generation](https://img.shields.io/badge/Image%20Generation-9C27B0?style=flat-square) ![Video Generation](https://img.shields.io/badge/Skills%20Creation-9C27B0?style=flat-square) ![Skills Creation](https://img.shields.io/badge/Skills%20Creation-9C27B0?style=flat-square)
 
-
-### Martial Arts
-I'm in it for the applications and exercise.
-
-| Martial Art | Rank | Years of Experience |
-| --- | --- | --- |
-| [Hung Gar Kuen](https://en.wikipedia.org/wiki/Hung_Ga) | Level 4 | 20+ years |
-| [Yang Style Tai Chi Chuan](https://en.wikipedia.org/wiki/Tai_chi) |  | 6 years |
-| [Tae Kwon Do](https://en.wikipedia.org/wiki/Taekwondo) | Black Belt | 2 years |
-| [Wing Chun](https://en.wikipedia.org/wiki/Wing_Chun) | SuiLumTao |  | 2 years |
-| [Hapkido](https://en.wikipedia.org/wiki/Hapkido) | Second Dan | 3 years |
-| [Kyokushin Karate](https://en.wikipedia.org/wiki/Kyokushin) | Unranked | 15+ years |
-
-
-Dabbled in [Baguazhang](https://en.wikipedia.org/wiki/Baguazhang) and [Xing-I/Hsing-I Quan](https://en.wikipedia.org/wiki/Xingyiquan).  Would like to gain experience in [Shuai jiao](https://en.wikipedia.org/wiki/Shuai_jiao), [Judo](https://en.wikipedia.org/wiki/Judo), [Brazilian Jiu-Jitsu](https://en.wikipedia.org/wiki/Brazilian_jiu-jitsu).
-
-
-<img src="./images/martial_arts_01.png" alt="martial_arts_01" style="width:200px;"/>
-<img src="./images/martial_arts_02.png" alt="martial_arts_02" style="width:600px;"/>
-<img src="./images/martial_arts_03.png" alt="martial_arts_03" style="width:300px;"/>
-
-<iframe width="640" height="480" src="https://youtu.be/P1VU82yn8SQ?t=66" title="Kyokushin Regional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-* [Tournaments](https://www.youtube.com/watch?v=P1VU82yn8SQ)
-* [Techniques](https://youtube.com/playlist?list=PLj6cjfP7PspidgyUIi1P6OFQZj7PpqmUN)
-
-### Shows
- * Sci-Fi and Fantasy
-    * Star Trek
-    * Star Wars
-    * The Expanse
-    * Westworld
-    * Game of Thrones/House of the Dragon
-
-
-### Video Games
-* Currently trying to finish `Baldur's Gate 3`.
-* Elden Ring/Seikiro/Witcher 3/Fallout
-* Counter Strike 2/Apex Legends
-* Dota 2/League of Legends
-
-<img src="./images/games_01.jpg" alt="dota_international" style="width:600px;"/>
-
-
-### Electronics
-I dabble in electronics.
-
-<img src="./images/electronics_01.jpg" alt="electronics_01" style="width:200px;"/>
-<img src="./images/electronics_02.jpg" alt="electronics_02" style="width:200px;"/>
-<img src="./images/electronics_03.jpg" alt="electronics_03" style="width:300px;"/>
-<img src="./images/electronics_04.jpg" alt="electronics_04" style="width:800px;"/>
-<img src="./images/electronics_05.jpg" alt="electronics_05" style="width:800px;"/>
-<img src="./images/electronics_06.jpg" alt="electronics_06" style="width:800px;"/>
-
-### Hacking
-
-I like participating in `Capture-The-Flags` (CTFs), CyberRanges, and Bug Bounties.
-
-<img src="./images/htb_01.png" alt="htb_01" style="width:200px;"/>
-<img src="./images/htb_02.jpg" alt="htb_02" style="width:380px;"/>
-
-
-CTFs for the team:
-* https://github.com/Wind010/ctfs
-
-Contributions back to the community:
-* https://github.com/OWASP/wrongsecrets/pull/1280
-* https://github.com/aelmokhtar/CVE-2024-34716/pull/1
-* https://github.com/Wind010/SolarPuttyDecryptor
-* https://github.com/Wind010/rsa_small_exponent_exploit
-
-Fun:
-* https://wind010.github.io/ctf_soundboard/
-* https://pages.scm.starbucks.com/jtong/stars-for-one/
-
-
-Relevant Blog Articles:
-* https://wind010.hashnode.dev/def-con-31
-* https://wind010.hashnode.dev/hack-the-box-machine-tips
-* https://wind010.hashnode.dev/capture-the-flags
-* https://wind010.hashnode.dev/transformation
-* https://wind010.hashnode.dev/hack-the-box-cubemadness1
-* https://wind010.hashnode.dev/reverse-engineering-practice
-* https://wind010.hashnode.dev/cracking-zip-and-rar-archives-with-passwords
-* https://wind010.hashnode.dev/pwnagotchi-learnings-2023
+<img src="./images/glow_divider.svg" width="100%" alt="divider"/>
 
 
 
-#### Bug Bounties
-Reporting on found vulnerabilities such as `Log4Shell`, `IDOR`, `Broken Access Controls`, and `Sensitive Information Disclosure`.
- * https://wind010.hashnode.dev/sensitive-data-exposure-and-vulnerability-reporting
- * https://wind010.hashnode.dev/log4shell
+**Projects**
+* [Code Chronicles](https://dev.hashnode.dev) — Personal blog focused on InfoSec and software engineering.
+* [PathFinder](https://github.com/wind010/PathFinder) — Automated cybersecurity reconnaissance tool.
+* [OWASP Wrong Secrets](https://github.com/OWASP/wrongsecrets) — Contributed fix for a challenge issue.
+* [Navi](https://github.com/denisidoro/navi) — Contributed improvements for better Windows support.
+* [Snips.sh](https://github.com/robherley/snips.sh) - Reporting and fixing security issues.
+
+<img src="./images/glow_divider.svg" width="100%" alt="divider"/>
+
+## Hacking / CTF
+
+<p align="center">
+  <a href="https://profile.hackthebox.com/profile/019e293b-19f7-735c-98b4-15408180fd89">
+    <img src="https://img.shields.io/badge/Hack%20The%20Box-Profile-9FEF00?style=for-the-badge&logo=hackthebox&logoColor=white" alt="Hack The Box Profile"/>
+  </a>
+</p>
+
+* CTFs: [github.com/Wind010/ctfs](https://github.com/Wind010/ctfs)
+* Bug bounty & vuln disclosures: `Log4Shell`, `IDOR`, `Broken Access Controls`, `Sensitive Information Disclosure`
+
+**Skills**
+<br>
+![SQL Injection](https://img.shields.io/badge/SQL%20Injection-9FEF00?style=flat-square&logoColor=black) ![Remote Code Execution](https://img.shields.io/badge/Remote%20Code%20Execution-9FEF00?style=flat-square&logoColor=black) ![Pivoting](https://img.shields.io/badge/Pivoting-9FEF00?style=flat-square&logoColor=black) ![Exploit Development](https://img.shields.io/badge/Exploit%20Development-9FEF00?style=flat-square&logoColor=black) ![DLL Sideloading](https://img.shields.io/badge/DLL%20Sideloading-9FEF00?style=flat-square&logoColor=black) ![Binary Analysis](https://img.shields.io/badge/Binary%20Analysis-9FEF00?style=flat-square&logoColor=black) ![Recon](https://img.shields.io/badge/Recon-9FEF00?style=flat-square&logoColor=black)
+
+**Tools**
+<br>
+![NMap](https://img.shields.io/badge/NMap-9FEF00?style=flat-square&logoColor=black) ![SQLMap](https://img.shields.io/badge/SQLMap-9FEF00?style=flat-square&logoColor=black) ![RustScan](https://img.shields.io/badge/RustScan-9FEF00?style=flat-square&logoColor=black) ![ffuf](https://img.shields.io/badge/ffuf-9FEF00?style=flat-square&logoColor=black) ![Impacket](https://img.shields.io/badge/Impacket-9FEF00?style=flat-square&logoColor=black) ![BloodyAD](https://img.shields.io/badge/BloodyAD-9FEF00?style=flat-square&logoColor=black) ![Certipy](https://img.shields.io/badge/Certipy-9FEF00?style=flat-square&logoColor=black) ![BloodHound](https://img.shields.io/badge/BloodHound-9FEF00?style=flat-square&logoColor=black) ![BloodBash](https://img.shields.io/badge/BloodBash-9FEF00?style=flat-square&logoColor=black) ![NetExec](https://img.shields.io/badge/NetExec-9FEF00?style=flat-square&logoColor=black)
+
+**Interests**
+<br>
+![Cloud](https://img.shields.io/badge/Cloud-1A1A1A?style=flat-square) ![Niche Technologies](https://img.shields.io/badge/Niche%20Technologies-1A1A1A?style=flat-square) ![Threat Intelligence](https://img.shields.io/badge/Threat%20Intelligence-1A1A1A?style=flat-square) ![OSINT](https://img.shields.io/badge/OSINT-1A1A1A?style=flat-square)
 
 
-### Coding
-Coding projects outside of work that are public on my github.  Participation in `Starbucks Six-Hack` weeks:
+<img src="./images/glow_divider.svg" width="100%" alt="divider"/>
 
-* [Simplified Returns](https://scm.starbucks.com/six-hack/internal_brew_gpt)
-* [Internal BrewGpt](https://scm.starbucks.com/six-hack/internal_brew_gpt)
-* [Brew Vision](https://scm.starbucks.com/six-hack/brew-vision)
-* [Coffee ShopS imulator](https://scm.starbucks.com/jtong/CoffeeShop)
+## GitHub Analytics
 
+<div align="center">
 
-Coding Signal, LeetCode, Code, CodeWars
+<a href="https://github.com/Wind010">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Wind010&theme=black-ice&hide_border=true&stroke=00FF00&background=0D1117&ring=00FF00&fire=FF0000&currStreakLabel=00FF00" alt="GitHub Streak" width="49%" />
+</a>
 
-<img src="./images/six_hack_01.jpg" alt="six_hack_01" style="width:400px;"/>
-<img src="./images/six_hack_02.jpg" alt="six_hack_02" style="width:400px;"/>
-
-
-### Machine Learning
-Specifically around computer vision, chatbots, LLMs, image/video generation, voice cloning.
-
-Image enhancement:
-
-<img src="./images/enhance_01.jpg" alt="enhance_01" style="width:400px;"/>
-<img src="./images/enhance_02.jpg" alt="enhance_02" style="width:400px;"/>
-
-Computer Vision:
-
-<img src="./images/computer_vision_01.png" alt="computer_vision_01" style="width:400px;"/>
-<img src="./images/computer_vision_02.png" alt="computer_vision_02" style="width:400px;"/>
-<img src="./images/computer_vision_03.png" alt="computer_vision_03" style="width:400px;"/>
-
-
-Contributions back to the community:
-* https://github.com/PromtEngineer/localGPT/pull/204
-
-Relevant Blog Articles:
-* https://wind010.hashnode.dev/restore-and-enhance-images
-* https://wind010.hashnode.dev/real-time-deep-fakes
-* https://wind010.hashnode.dev/audio-deep-fakes
-
-
-### Podcasts
-I listen to a lot of podcasts while multitasking.
-
-<div class="grid-container">
-    <div class="grid-item"><a href="https://www.preposterousuniverse.com/podcast/" target="_blank">
-            <img src="./images/mindscape.jpg" style="width:300px;" />
-        </a></div>
-    <div class="grid-item"><a href="https://lexfridman.com/podcast/" target="_blank">
-            <img src="./images/lex_fridman.png" style="width:300px;"  />
-        </a></div>
-    <div class="grid-item"><a href="https://www.hubermanlab.com/podcast" target="_blank">
-            <img src="./images/andrew_huberman.jpg" style="width:300px;"  />
-        </a>
-    </div>
-    <div class="grid-item"><a href="https://www.guyraz.com/howibuiltthisbook" target="_blank">
-            <img src="./images/how_i_built_this.jpg" style="width:300px;"  />
-        </a>
-    </div>
-    <div class="grid-item"><a href="https://stuffyoushouldknow.com/" target="_blank">
-            <img src="./images/sysk.jpg" style="width:300px;" />
-        </a>
-    </div>
-    <div class="grid-item"><a href="https://www.iheart.com/podcast/105-stuff-they-dont-want-you-t-26941221/"
-            target="_blank">
-            <img src="./images/stdwyk.jpg" style="width:300px;"  />
-        </a></div>
-    <div class="grid-item"><a href="https://www.dancarlin.com/hardcore-history-series/" target="_blank">
-            <img src="./images/hardcore_history.jpg" style="width:300px;"  />
-        </a></div>
-    <div class="grid-item"><a href="https://astonishinglegends.com/" target="_blank">
-            <img src="./images/astonishing_legends.jpg" style="width:300px;" />
-        </a></div>
-    <div class="grid-item"><a href="https://allin.com/" target="_blank">
-            <img src="./images/all_in_podcast.jpg" style="width:300px;" />
-        </a></div>
 </div>
 
-</br>
+<img src="./images/glow_divider.svg" width="100%" alt="divider"/>
 
-
-### Cosplay
-I dabble in Cosplay.
-
-<img src="./images/cosplay_01.jpg" alt="cosplay_01" style="width:200px;"/>
-<img src="./images/cosplay_02.png" alt="cosplay_02" style="width:200px;"/>
-<img src="./images/cosplay_03.png" alt="cosplay_03" style="width:330px;"/>
-<img src="./images/cosplay_04.jpg" alt="cosplay_04" style="width:330px;"/>
-<img src="./images/ecc_01.png" alt="ecc_01" style="width:330px;"/>
-<img src="./images/ecc_02.jpg" alt="ecc_02" style="width:330px;"/>
-
-
-### Humor
-I enjoy making `memes` and leaving `Easter Eggs` in code comments that attempt to make people laugh.
-
-<img src="./images/meme_01.jpg" alt="meme_01" style="width:500px;"/>
-
-```sh
-...
-```
-
-<img src="./images/meme_02.jpg" alt="meme_02" style="width:500px;"/>
-
-#### Easter Comments Eggs
-* TODO
+<img width="100%" src="./images/matrix_footer.svg" alt="Thanks for visiting" />

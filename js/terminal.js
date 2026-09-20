@@ -565,22 +565,13 @@ function getContentUnderHeader(markdown, headerPath) {
   return cleanResult;
 }
 
-// Github pages doesn't allow access directly to the markdown.  
-// Fallback to the base64 encoded version.
 async function fetchMarkdown() {
-  try {
-    const response = await fetch('readme.md'); // Path to the Markdown file
-    if (!response.ok) {
-      console.log(response);
-      throw new Error('Network response was not ok');
-    }
-    const markdownText = await response.text();
-    markdown = markdownText;
-  } catch (error) {
-    console.error('Error fetching markdown:', error);
-    console.debug('Using the base64 version');
-    markdown = atob(readme);
+  const response = await fetch('terminal.md'); // Path to the Markdown file
+  if (!response.ok) {
+    console.error('Error fetching markdown:', response);
+    return;
   }
+  markdown = await response.text();
 }
 
 fetchMarkdown();
