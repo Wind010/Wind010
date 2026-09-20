@@ -19,7 +19,10 @@
     <img src="https://img.shields.io/badge/Blog-Code%20Chronicles-2962FF?style=for-the-badge&logo=hashnode&logoColor=white" alt="Blog"/>
   </a>
   <a href="https://wind010.github.io/Wind010/">
-    <img src="https://img.shields.io/badge/Resume-jeff--tong.dev-FF5722?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/>
+    <img src="https://img.shields.io/badge/Resume-jeff--tong.dev-222222?style=for-the-badge&logo=githubpages&logoColor=white" alt="Portfolio"/>
+  </a>
+  <a href="https://wind010.github.io/Wind010/about_me.html">
+    <img src="https://img.shields.io/badge/About%20Me-terminal-000000?style=for-the-badge&logo=windowsterminal&logoColor=00FF41" alt="About Me"/>
   </a>
 </p>
 
