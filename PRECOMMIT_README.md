@@ -1,14 +1,16 @@
 # Pre-Commit Hook
 
-Because Github Pages won't include the `ReadMe.md`, I have a pre-commit hook that populates the `js\readme.js` with a `base64` encoded string of the contents of `ReadMe.md` that will get decoded by the page.  This `pre-commit` script should be included under `.git\hooks`.
+`terminal.html` needs its personal/bio content as a JS string (GitHub Pages won't let `terminal.js` `fetch()` a same-origin markdown file reliably, so it falls back to a decoded copy). A pre-commit hook keeps `js/terminal-content.js` in sync with `terminal.md` by base64-encoding it whenever `terminal.md` changes. This `pre-commit` script should be included under `.git/hooks` (not tracked by git, so it must be installed manually per clone).
+
+`README.md` is unrelated to this pipeline — it's the flashy GitHub-profile page and is not consumed by `terminal.html`.
 
 ```sh
 #!/bin/bash
 
-# Configuration
-SOURCE_FILE="README.md"
-TARGET_JS_FILE="js/readme.js"
-CONSTANT_NAME="readme"
+# Keep js/terminal-content.js in sync with terminal.md (only when terminal.md is staged).
+SOURCE_FILE="terminal.md"
+TARGET_JS_FILE="js/terminal-content.js"
+CONSTANT_NAME="terminalContent"
 
 if [ ! -f "$SOURCE_FILE" ]; then
   echo "Source file not found: $SOURCE_FILE"
@@ -20,28 +22,26 @@ if [ ! -f "$TARGET_JS_FILE" ]; then
   exit 2
 fi
 
-
-if ! git diff --quiet --cached "$SOURCE_FILE"; then
-  echo "Source file has changes. Proceeding with base64 encoding."
-
-  # Base64 encode the source file
-  BASE64_ENCODED=$(base64 "$SOURCE_FILE")
-
-  # Update the JavaScript file with the base64 encoded string
-  sed -i "/^const ${CONSTANT_NAME} = /c\\const ${CONSTANT_NAME} = \"$BASE64_ENCODED\";" "$TARGET_JS_FILE"
-
-  # Check if the sed command was successful
-  if [ $? -ne 0 ]; then
-    echo "Failed to update the JavaScript file."
-    exit 3
-  fi
-
-  # Stage the changes to the JavaScript file
-  git add "$TARGET_JS_FILE"
-
-  echo "Pre-commit hook completed successfully."
-else
-  echo "Source file has no changes. Skipping base64 encoding."
+# Skip all work unless terminal.md is staged for commit.
+if git diff --quiet --cached -- "$SOURCE_FILE"; then
+  echo "terminal.md has no staged changes. Skipping terminal-content.js update."
   exit 0
 fi
+
+echo "terminal.md has staged changes. Updating js/terminal-content.js..."
+
+# Use a single-line base64 value so the JS const remains a single line.
+BASE64_ENCODED=$(base64 < "$SOURCE_FILE" | tr -d '\n')
+
+# Update only the `const terminalContent = "...";` line.
+if ! perl -0pi -e 's/^const\s+'"$CONSTANT_NAME"'\s*=\s*".*";$/const '"$CONSTANT_NAME"' = "'"$BASE64_ENCODED"'";/m' "$TARGET_JS_FILE"; then
+  echo "Failed to update $TARGET_JS_FILE"
+  exit 3
+fi
+
+# Stage the generated file if it changed.
+git add "$TARGET_JS_FILE"
+
+echo "Updated and staged $TARGET_JS_FILE"
+exit 0
 ```
