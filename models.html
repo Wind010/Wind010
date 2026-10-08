@@ -1,0 +1,64 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arno Cosplay</title>
+<style>
+  html, body { margin: 0; height: 100%; background: radial-gradient(ellipse at 50% 45%, #3f4144 0%, #25262a 55%, #151618 100%); overflow: hidden; }
+  #msg { position: fixed; left: 12px; top: 12px; color: #ddd; font: 13px/1.4 system-ui; white-space: pre; }
+</style>
+<div id="msg">loading…</div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.183.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const msg = document.getElementById('msg');
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1;
+renderer.setPixelRatio(devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(27, innerWidth / innerHeight, 0.01, 1000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// image-based light only; no analytic lights
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+
+try {
+  const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('models/arno_01.glb');
+  scene.add(gltf.scene);
+
+  const aniso = renderer.capabilities.getMaxAnisotropy();
+  let tris = 0;
+  gltf.scene.traverse((o) => {
+    if (!o.isMesh) return;
+    tris += o.geometry.index.count / 3;
+    for (const m of ['map', 'normalMap', 'roughnessMap', 'metalnessMap']) if (o.material[m]) o.material[m].anisotropy = aniso;
+  });
+
+  const box = new THREE.Box3().setFromObject(gltf.scene), c = box.getCenter(new THREE.Vector3());
+  const r = Math.max(...box.getSize(new THREE.Vector3()).toArray());
+  controls.target.copy(c);
+  camera.position.set(c.x + r * 2.3, c.y, c.z); // the model faces +X
+  camera.near = r / 100; camera.far = r * 100; camera.updateProjectionMatrix();
+  msg.textContent = `${tris.toLocaleString()} tris`;
+} catch (e) {
+  msg.textContent = 'failed: ' + e.message;
+  console.error(e);
+}
+
+addEventListener('resize', () => {
+  renderer.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+});
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+</script>
