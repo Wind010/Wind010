@@ -24,6 +24,9 @@
   <a href="https://wind010.github.io/Wind010/about_me.html">
     <img src="https://img.shields.io/badge/About%20Me-terminal-000000?style=for-the-badge&logo=windowsterminal&logoColor=00FF41" alt="About Me"/>
   </a>
+  <a href="https://jeff-tong.dev/models.html">
+    <img src="https://img.shields.io/badge/Models-3D%20Meshes-000000?style=for-the-badge&logo=threedotjs&logoColor=00FF41" alt="3D Meshes"/>
+  </a>
 </p>
 
 </div>
@@ -32,7 +35,18 @@
 
 I am a software developer with interests in `cybersecurity` and `machine learning`.  This markdown is the content used for [About Me](https://jeff-tong.dev/about_me.html).
 
-<img src="./images/euc_01.jpg" alt="euc_01" style="width:300px;"/>
+<table>
+  <tr>
+    <td valign="middle">
+      <img src="./images/euc_01.jpg" alt="euc_01" width="300" style="width:300px;"/>
+    </td>
+    <td valign="middle">
+      <a href="https://jeff-tong.dev/models.html?model=arno_02&amp;spin=lr" title="Arno Hooded - open the interactive 3D view">
+        <img src="./images/model_arno_02.gif" alt="Arno Hooded 3D model, turntable" width="360"/>
+      </a>
+    </td>
+  </tr>
+</table>
 
 <img src="./images/glow_divider.svg" width="100%" alt="divider"/>
 
