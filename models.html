@@ -5,10 +5,14 @@
 <style>
   html, body { margin: 0; height: 100%; background: radial-gradient(ellipse at 50% 45%, #3f4144 0%, #25262a 55%, #151618 100%); overflow: hidden; }
   #msg { position: fixed; left: 12px; top: 12px; color: #ddd; font: 13px/1.4 system-ui; white-space: pre; }
-  #pick { position: fixed; right: 12px; top: 12px; padding: 6px 10px; color: #ddd; background: rgba(0, 0, 0, .45); border: 1px solid #555; border-radius: 6px; font: 13px system-ui; }
+  #ui { position: fixed; right: 12px; top: 12px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  #ui select { padding: 6px 10px; color: #ddd; background: rgba(0, 0, 0, .45); border: 1px solid #555; border-radius: 6px; font: 13px system-ui; }
 </style>
 <div id="msg">loading…</div>
-<select id="pick" aria-label="Model"></select>
+<div id="ui">
+  <select id="pick" aria-label="Model"></select>
+  <select id="spin" aria-label="Rotation"></select>
+</div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.183.0/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from 'three';
@@ -24,8 +28,22 @@ const MODELS = {
   arno_02: { label: 'Arno Hooded', face: [0, 0, -1] },
 };
 
+// axes are relative to the camera so "left to right" reads the same for every model:
+// up = vertical turntable, right = horizontal tumble, view = roll about the line of sight
+const SPINS = {
+  off: { label: 'Off' },
+  lr: { label: 'Left → Right', axis: 'up', sign: 1 },
+  rl: { label: 'Right → Left', axis: 'up', sign: -1 },
+  td: { label: 'Top → Bottom', axis: 'right', sign: 1 },
+  bt: { label: 'Bottom → Top', axis: 'right', sign: -1 },
+  cw: { label: 'Clockwise', axis: 'view', sign: 1 },
+  ccw: { label: 'Counterclockwise', axis: 'view', sign: -1 },
+};
+const SPIN_SECONDS = 20; // per revolution
+
 const msg = document.getElementById('msg');
 const pick = document.getElementById('pick');
+const spin = document.getElementById('spin');
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -55,13 +73,13 @@ function dispose(root) {
   });
 }
 
-// view the model from its front; fit the visible height and width for the current aspect
+// view the model from its front; fit the visible height and width (including its turntable swing) for the current aspect
 function frame(root, [dx, , dz] = [1, 0, 0]) {
   const box = new THREE.Box3().setFromObject(root), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
   const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
   const alongZ = dz !== 0;
   const depth = alongZ ? size.z : size.x, width = alongZ ? size.x : size.z;
-  const dist = Math.max(size.y / 2 / t, width / 2 / (t * camera.aspect)) * 1.12 + depth / 2;
+  const dist = Math.max(size.y / 2 / t, Math.hypot(width, depth) / 2 / (t * camera.aspect)) * 1.12 + depth / 2;
   const r = Math.max(size.x, size.y, size.z);
   controls.target.copy(c);
   camera.position.set(c.x + dx * dist, c.y, c.z + dz * dist);
@@ -69,7 +87,7 @@ function frame(root, [dx, , dz] = [1, 0, 0]) {
   controls.update();
 }
 
-let current = null, latest = 0;
+let current = null, latest = 0; // current is a pivot group at the model's centre, so it spins about itself
 async function show(id) {
   const mine = ++latest;
   msg.textContent = 'loading…';
@@ -77,7 +95,10 @@ async function show(id) {
     const gltf = await loader.loadAsync(`models/${id}.glb`);
     if (mine !== latest) return dispose(gltf.scene); // a newer selection superseded this one
     if (current) { scene.remove(current); dispose(current); }
-    current = gltf.scene;
+    current = new THREE.Group();
+    current.position.copy(new THREE.Box3().setFromObject(gltf.scene).getCenter(new THREE.Vector3()));
+    gltf.scene.position.sub(current.position);
+    current.add(gltf.scene);
     let tris = 0;
     current.traverse((o) => {
       if (!o.isMesh) return;
@@ -95,12 +116,21 @@ async function show(id) {
   }
 }
 
+const params = new URLSearchParams(location.search);
+const sync = () => history.replaceState(null, '', `?model=${pick.value}&spin=${spin.value}`);
+
 for (const [id, { label }] of Object.entries(MODELS)) pick.add(new Option(label, id));
-const asked = new URLSearchParams(location.search).get('model');
-pick.value = Object.hasOwn(MODELS, asked) ? asked : Object.keys(MODELS)[0];
-pick.addEventListener('change', () => {
-  history.replaceState(null, '', '?model=' + pick.value);
-  show(pick.value);
+for (const [id, { label }] of Object.entries(SPINS)) spin.add(new Option('Rotate: ' + label, id));
+pick.value = Object.hasOwn(MODELS, params.get('model')) ? params.get('model') : Object.keys(MODELS)[0];
+spin.value = Object.hasOwn(SPINS, params.get('spin')) ? params.get('spin') : matchMedia('(prefers-reduced-motion: reduce)').matches ? 'off' : 'lr';
+
+let spinMode = spin.value;
+pick.addEventListener('change', () => { sync(); show(pick.value); });
+spin.addEventListener('change', () => {
+  const was = SPINS[spinMode].axis, now = SPINS[spin.value].axis;
+  if (was && now && was !== now) current?.quaternion.identity(); // restart from the front when the axis changes
+  spinMode = spin.value;
+  sync();
 });
 show(pick.value);
 
@@ -109,5 +139,22 @@ addEventListener('resize', () => {
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
 });
-renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+
+const right = new THREE.Vector3(), up = new THREE.Vector3(), back = new THREE.Vector3(), WORLD_UP = new THREE.Vector3(0, 1, 0);
+let last = 0, dragging = false;
+controls.addEventListener('start', () => { dragging = true; }); // hold still while the user orbits
+controls.addEventListener('end', () => { dragging = false; });
+renderer.setAnimationLoop((t) => {
+  const dt = Math.min((t - last) / 1000, 0.1); last = t;
+  controls.update();
+  const s = SPINS[spinMode];
+  if (current && s.axis && !dragging) {
+    camera.updateMatrixWorld();
+    camera.matrixWorld.extractBasis(right, up, back);
+    const axis = s.axis === 'up' ? WORLD_UP : s.axis === 'right' ? right : back.negate();
+    current.rotateOnWorldAxis(axis, s.sign * dt * 2 * Math.PI / SPIN_SECONDS);
+    current.quaternion.normalize();
+  }
+  renderer.render(scene, camera);
+});
 </script>
