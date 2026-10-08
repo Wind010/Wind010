@@ -1,12 +1,14 @@
 <!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arno Cosplay</title>
+<title>Models</title>
 <style>
   html, body { margin: 0; height: 100%; background: radial-gradient(ellipse at 50% 45%, #3f4144 0%, #25262a 55%, #151618 100%); overflow: hidden; }
   #msg { position: fixed; left: 12px; top: 12px; color: #ddd; font: 13px/1.4 system-ui; white-space: pre; }
+  #pick { position: fixed; right: 12px; top: 12px; padding: 6px 10px; color: #ddd; background: rgba(0, 0, 0, .45); border: 1px solid #555; border-radius: 6px; font: 13px system-ui; }
 </style>
 <div id="msg">loading…</div>
+<select id="pick" aria-label="Model"></select>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.183.0/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from 'three';
@@ -15,7 +17,15 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
+// id -> { label, face }; the file is models/<id>.glb and face is the axis-aligned direction the model looks (default +x)
+const MODELS = {
+  arno_01: { label: 'Arno Cosplay' },
+  oscar_portrait_01: { label: 'Oscar Portrait' },
+  arno_02: { label: 'Arno Hooded', face: [0, 0, -1] },
+};
+
 const msg = document.getElementById('msg');
+const pick = document.getElementById('pick');
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -32,28 +42,67 @@ controls.enableDamping = true;
 // image-based light only; no analytic lights
 scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
 
-try {
-  const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('models/arno_01.glb');
-  scene.add(gltf.scene);
+const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+const aniso = renderer.capabilities.getMaxAnisotropy();
+const MAPS = ['map', 'normalMap', 'roughnessMap', 'metalnessMap'];
 
-  const aniso = renderer.capabilities.getMaxAnisotropy();
-  let tris = 0;
-  gltf.scene.traverse((o) => {
+function dispose(root) {
+  root.traverse((o) => {
     if (!o.isMesh) return;
-    tris += o.geometry.index.count / 3;
-    for (const m of ['map', 'normalMap', 'roughnessMap', 'metalnessMap']) if (o.material[m]) o.material[m].anisotropy = aniso;
+    o.geometry.dispose();
+    for (const m of MAPS) o.material[m]?.dispose();
+    o.material.dispose();
   });
-
-  const box = new THREE.Box3().setFromObject(gltf.scene), c = box.getCenter(new THREE.Vector3());
-  const r = Math.max(...box.getSize(new THREE.Vector3()).toArray());
-  controls.target.copy(c);
-  camera.position.set(c.x + r * 2.3, c.y, c.z); // the model faces +X
-  camera.near = r / 100; camera.far = r * 100; camera.updateProjectionMatrix();
-  msg.textContent = `${tris.toLocaleString()} tris`;
-} catch (e) {
-  msg.textContent = 'failed: ' + e.message;
-  console.error(e);
 }
+
+// view the model from its front; fit the visible height and width for the current aspect
+function frame(root, [dx, , dz] = [1, 0, 0]) {
+  const box = new THREE.Box3().setFromObject(root), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+  const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const alongZ = dz !== 0;
+  const depth = alongZ ? size.z : size.x, width = alongZ ? size.x : size.z;
+  const dist = Math.max(size.y / 2 / t, width / 2 / (t * camera.aspect)) * 1.12 + depth / 2;
+  const r = Math.max(size.x, size.y, size.z);
+  controls.target.copy(c);
+  camera.position.set(c.x + dx * dist, c.y, c.z + dz * dist);
+  camera.near = r / 100; camera.far = r * 100; camera.updateProjectionMatrix();
+  controls.update();
+}
+
+let current = null, latest = 0;
+async function show(id) {
+  const mine = ++latest;
+  msg.textContent = 'loading…';
+  try {
+    const gltf = await loader.loadAsync(`models/${id}.glb`);
+    if (mine !== latest) return dispose(gltf.scene); // a newer selection superseded this one
+    if (current) { scene.remove(current); dispose(current); }
+    current = gltf.scene;
+    let tris = 0;
+    current.traverse((o) => {
+      if (!o.isMesh) return;
+      tris += o.geometry.index.count / 3;
+      for (const m of MAPS) if (o.material[m]) o.material[m].anisotropy = aniso;
+    });
+    scene.add(current);
+    frame(current, MODELS[id].face);
+    document.title = MODELS[id].label;
+    msg.textContent = `${tris.toLocaleString()} tris`;
+  } catch (e) {
+    if (mine !== latest) return;
+    msg.textContent = 'failed: ' + e.message;
+    console.error(e);
+  }
+}
+
+for (const [id, { label }] of Object.entries(MODELS)) pick.add(new Option(label, id));
+const asked = new URLSearchParams(location.search).get('model');
+pick.value = Object.hasOwn(MODELS, asked) ? asked : Object.keys(MODELS)[0];
+pick.addEventListener('change', () => {
+  history.replaceState(null, '', '?model=' + pick.value);
+  show(pick.value);
+});
+show(pick.value);
 
 addEventListener('resize', () => {
   renderer.setSize(innerWidth, innerHeight);
