@@ -105,6 +105,7 @@ I am a software developer with interests in `cybersecurity` and `machine learnin
 * [OWASP Wrong Secrets](https://github.com/OWASP/wrongsecrets) — Contributed fix for a challenge issue.
 * [Navi](https://github.com/denisidoro/navi) — Contributed improvements for better Windows support.
 * [Snips.sh](https://github.com/robherley/snips.sh) - Reporting and fixing security issues.
+* [OpenGist](https://github.com/thomiceli/opengist/issues/784) - Reporting XSS on file upload.
 
 <img src="./images/glow_divider.svg" width="100%" alt="divider"/>
 
